@@ -13,6 +13,7 @@ describe 'slash_commands/incident' do
     end
 
     context 'with a command' do
+      let!(:web_client) { SlackMock.web_client }
       let!(:team) { Fabricate(:team) }
       let(:trigger_id) { '12345.98765.abcd2358fdea' }
       let(:command) do
@@ -28,8 +29,10 @@ describe 'slash_commands/incident' do
         }
       end
 
-      it 'returns an incident modal' do
-        # expect_any_instance_of(Logger).to receive(:info).with('Someone raised an incident in channel test.')
+      it 'successfully processes the request' do
+        allow_any_instance_of(Logger).to receive(:info).with('request')
+        allow_any_instance_of(Logger).to receive(:info).with('response')
+        allow_any_instance_of(Logger).to receive(:info).with('Someone raised an incident in channel test.')
         post '/api/slack/command', command
         expect(last_response.status).to eq 204
       end
