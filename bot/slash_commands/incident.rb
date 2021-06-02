@@ -1,8 +1,19 @@
-def incident_payload(trigger_id)
+SlackRubyBotServer::Events.configure do |config|
+  config.on :command, '/incident' do |command|
+    p command
+    command.logger.info "Someone raised an incident in channel #{command[:channel_id]}."
+    slack_connection(command)
+    nil
+  end
+end
+
+def slack_connection(trigger_id, view = incident_payload)
+  slack_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
+  slack_client.views_open(trigger_id: trigger_id[:trigger_id], view: view)
+end
+
+def incident_payload
   {
-    trigger_id: trigger_id,
-    "response_action": "clear",
-    "view": {
       "type": "modal",
       "callback_id": "modal-identifier",
       "title": {
@@ -50,6 +61,66 @@ def incident_payload(trigger_id)
           "label": {
             "type": "plain_text",
             "text": "Incident description"
+          }
+        },
+        {
+          "type": "input",
+          "block_id": "service_selection_block",
+          "label": {
+            "type": "plain_text",
+            "text": "Which service is impacted?",
+            "emoji": true
+          },
+          "element": {
+            "type": "static_select",
+            "action_id": "service_selection",
+            "placeholder": {
+              "type": "plain_text",
+              "text": "Select a service",
+              "emoji": true
+            },
+            "options": [
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Apply",
+                  "emoji": true
+                },
+                "value": "value-0"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Find",
+                  "emoji": true
+                },
+                "value": "value-1"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Multiple",
+                  "emoji": true
+                },
+                "value": "value-2"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Other",
+                  "emoji": true
+                },
+                "value": "value-3"
+              },
+              {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Infrastructure",
+                  "emoji": true
+                },
+                "value": "value-4"
+              }
+            ]
           }
         },
         {
@@ -161,21 +232,6 @@ def incident_payload(trigger_id)
             "action_id": "support_lead_select_action"
           }
         }
-      ],
-    }
+      ]
   }
-end
-
-SlackRubyBotServer::Events.configure do |config|
-  config.on :command, '/incident' do |command|
-    p command
-    channel_id = command[:channel_id]
-    command.logger.info "Someone raised an incident in channel #{channel_id}."
-    token = ENV['SLACK_TOKEN']
-    slack_client = Slack::Web::Client.new(token: token)
-    slack_client.auth_test
-
-    slack_client.views_open(incident_payload(command[:trigger_id]))
-    nil
-  end
 end

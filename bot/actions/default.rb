@@ -6,6 +6,7 @@ SlackRubyBotServer::Events.configure do |config|
     payload_values = action[:payload][:view][:state][:values]
     incident_title = payload_values[:incident_title_block][:incident_title][:value]
     incident_description = payload_values[:incident_description_block][:incident_description][:value]
+    incident_service = payload_values[:service_selection_block][:service_selection][:selected_option][:text][:text]
     incident_priority = payload_values[:incident_priority_block][:incident_priority][:selected_option][:text][:text]
     incident_comms_lead = payload_values[:incident_comms_lead_block][:comms_lead_select_action][:selected_user]
     incident_tech_lead = payload_values[:incident_tech_lead_block][:tech_lead_select_action][:selected_user]
@@ -16,7 +17,7 @@ SlackRubyBotServer::Events.configure do |config|
     client = Slack::Web::Client.new(token: token)
     client.auth_test
 
-    create_channel = client.conversations_create(name: "incident_apply_#{incident_start}_#{incident_title.parameterize.underscore}", is_private: false)
+    create_channel = client.conversations_create(name: "incident_#{incident_service.downcase}_#{incident_start}_#{incident_title.parameterize.underscore}", is_private: false)
     channel_name = create_channel[:channel][:id]
 
     threads = []
