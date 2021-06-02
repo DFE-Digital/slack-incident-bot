@@ -4,7 +4,6 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.2'
 
 # Load env variables
-gem 'dotenv-rails', '~> 2.7', require: 'dotenv/rails-now'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 6.0.3', '>= 6.0.3.3'
 # Use Puma as the app server
@@ -37,6 +36,7 @@ gem 'pry'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'dotenv-rails', '~> 2.7', require: 'dotenv/rails-now'
   gem 'standalone_migrations'
 end
 
@@ -48,7 +48,14 @@ group :development do
 end
 
 group :test do
-gem 'rspec'
+  gem 'async-websocket', '~> 0.8.0'
+  gem 'database_cleaner'
+  gem 'fabrication'
+  gem 'faker'
+  gem 'rack-test'
+  gem 'rake'
+  gem 'rspec'
+  gem 'rspec-rails'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
