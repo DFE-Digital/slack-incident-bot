@@ -15,7 +15,7 @@ end
 def incident_payload
   {
       "type": "modal",
-      "callback_id": "modal-identifier",
+      "callback_id": "incident-modal-identifier",
       "title": {
         "type": "plain_text",
         "text": "Raise an incident"

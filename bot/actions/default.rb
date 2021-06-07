@@ -1,5 +1,7 @@
 SlackRubyBotServer::Events.configure do |config|
-  config.on :action do |action|
+  config.on :action, 'view_submission' do |action|
+    binding.pry
+    p action
     action.logger.info "Received #{action[:payload][:type]}."
     t1 = Time.now
 
@@ -12,10 +14,8 @@ SlackRubyBotServer::Events.configure do |config|
     incident_tech_lead = payload_values[:incident_tech_lead_block][:tech_lead_select_action][:selected_user]
     incident_support_lead = payload_values[:incident_support_lead_block][:support_lead_select_action][:selected_user]
 
-    token = ENV['SLACK_TOKEN']
     incident_start = Time.new.strftime("%y%m%d")
-    client = Slack::Web::Client.new(token: token)
-    client.auth_test
+    client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
 
     create_channel = client.conversations_create(name: "incident_#{incident_service.downcase}_#{incident_start}_#{incident_title.parameterize.underscore}", is_private: false)
     channel_name = create_channel[:channel][:id]
