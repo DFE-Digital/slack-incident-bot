@@ -1,6 +1,5 @@
 SlackRubyBotServer::Events.configure do |config|
   config.on :action, 'view_submission' do |action|
-    binding.pry
     p action
     action.logger.info "Received #{action[:payload][:type]}."
     t1 = Time.now

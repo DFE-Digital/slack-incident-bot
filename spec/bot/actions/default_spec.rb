@@ -192,7 +192,6 @@ describe 'actions/default' do
       end
 
       it 'logs the action' do
-        binding.pry
         expect_any_instance_of(Logger).to receive(:info).with('Received view_submission.')
         post '/api/slack/action', payload: payload.to_json
         expect(last_response.status).to eq 204

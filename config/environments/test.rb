@@ -41,6 +41,10 @@ Rails.application.configure do
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
 
+  # Try and turn off logging for all the psql stuff
+  old_logger = ActiveRecord::Base.logger
+  ActiveRecord::Base.logger = nil
+
   # Raises error for missing translations.
   # config.action_view.raise_on_missing_translations = true
 end
