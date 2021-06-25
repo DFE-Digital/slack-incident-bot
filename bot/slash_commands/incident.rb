@@ -14,6 +14,6 @@ end
 
 def incident_payload
   JSON.parse(
-    File.read(Rails.root.join("lib/view_payloads/incident.json"))
+    File.read(Rails.root.join('lib/view_payloads/incident.json'))
   )
 end

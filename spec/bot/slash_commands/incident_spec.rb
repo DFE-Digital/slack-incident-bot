@@ -11,7 +11,7 @@ RSpec.describe 'slash_commands/incident' do
         user_id: 'user_id',
         team_id: 'team_id',
         token: 'deprecated',
-        trigger_id: '12345.98765.abcd2358fdea',
+        trigger_id: '12345.98765.abcd2358fdea'
       }
     end
 

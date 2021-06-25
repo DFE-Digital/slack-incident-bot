@@ -13,7 +13,7 @@ describe 'slash_commands/ping' do
     end
 
     context 'with a command' do
-    let!(:team) { Fabricate(:team) }
+      let!(:team) { Fabricate(:team) }
 
       let(:command) do
         {

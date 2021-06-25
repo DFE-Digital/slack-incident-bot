@@ -6,5 +6,6 @@ abort('The Rails environment is running in production mode!') if Rails.env.produ
 require 'rspec/rails'
 
 Dir[Rails.root.join('bot', 'slash_commands', '**', '*.rb')].sort.each { |f| require f }
+Dir[Rails.root.join('bot', 'actions', '**', '*.rb')].sort.each { |f| require f }
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
