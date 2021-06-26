@@ -15,30 +15,6 @@ describe 'actions/slack_incident_listener' do
     expect(response).to eq('error' => 'Invalid Signature')
   end
 
-  context 'chat_postMessage' do
-    it 'automatically converts attachments and blocks into JSON' do
-      expect(client).to receive(:post).with(
-        'chat.postMessage',
-        channel: 'channel',
-        text: 'text',
-        attachments: '[]',
-        blocks: '[]'
-      )
-      client.chat_postMessage(channel: 'channel', text: 'text', attachments: [], blocks: [])
-    end
-
-    it 'requires text, attachments or blocks' do
-      expect { client.chat_postMessage(channel: 'channel') }.to(
-        raise_error(ArgumentError, /Required arguments :text, :attachments or :blocks missing/)
-      )
-    end
-
-    it 'only text' do
-      expect(client).to receive(:post).with('chat.postMessage', hash_including(text: 'text'))
-      expect { client.chat_postMessage(channel: 'channel', text: 'text') }.not_to raise_error
-    end
-  end
-
   context 'without signature checks' do
     before do
       allow_any_instance_of(Slack::Events::Request).to receive(:verify!)
