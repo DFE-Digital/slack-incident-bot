@@ -1,2 +1,2 @@
-require_relative 'actions/default'
-require_relative 'actions/quiz'
+require_relative 'actions/slack_incident_listener'
+require_relative 'actions/slack_incident_actions'

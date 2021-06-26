@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'actions/default' do
+describe 'actions/slack_incident_listener' do
   include Rack::Test::Methods
   let(:client) { Slack::Web::Client.new }
 
