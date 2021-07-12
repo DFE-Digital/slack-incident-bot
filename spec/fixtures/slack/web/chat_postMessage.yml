@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: channel=C01RZAVQ6QM&text=test&token=token
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.17.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Tue, 06 Jul 2021 08:11:19 GMT
+      Server:
+      - Apache
+      X-Xss-Protection:
+      - '0'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Slack-Req-Id:
+      - 107b807b8532a4a8968eeb807c0c898c
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - no-referrer
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      X-Slack-Backend:
+      - r
+      X-Oauth-Scopes:
+      - users:read,channels:read,groups:read,chat:write,commands,incoming-webhook,team:read,channels:manage,pins:write
+      X-Accepted-Oauth-Scopes:
+      - chat:write
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Content-Length:
+      - '340'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Envoy-Upstream-Service-Time:
+      - '66'
+      X-Backend:
+      - main_normal main_canary_with_overflow main_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-g2pq
+      X-Via:
+      - envoy-www-iad-l4nj, haproxy-edge-lhr-a3p1
+      X-Slack-Shared-Secret-Outcome:
+      - shared-secret
+      Via:
+      - envoy-www-iad-l4nj
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"channel":"C01RZAVQ6QM","ts":"1625559079.000500","message":{"bot_id":"B022U61DV7S","type":"message","text":":rotating_light: &lt;!here&gt; A new incident has been opened :rotating_light:&gt; *Title:* Testing title&gt;*Priority:* P1 (High) - 60-100% of users affected&gt;*Comms:* <#C026YT07W6S>, ts=1625558539.000400, type=message, user=U0224J2AHJP, ok=true, ts=1625558539.000400","user":"U0224J2AHJP","ts":"1625559079.000500","team":"T01SF1W8V17","bot_profile":{"id":"B022U61DV7S","deleted":false,"name":"DFE
+        incident bot","updated":1621345614,"app_id":"A021D8M1RT9","icons":{"image_36":"https:\/\/avatars.slack-edge.com\/2021-05-18\/2069959218038_3f98a351ff3a2af9a2c9_36.jpg","image_48":"https:\/\/avatars.slack-edge.com\/2021-05-18\/2069959218038_3f98a351ff3a2af9a2c9_48.jpg","image_72":"https:\/\/avatars.slack-edge.com\/2021-05-18\/2069959218038_3f98a351ff3a2af9a2c9_72.jpg"},"team_id":"T01SF1W8V17"}}}'
+  recorded_at: Tue, 06 Jul 2021 08:11:19 GMT
+recorded_with: VCR 6.0.0

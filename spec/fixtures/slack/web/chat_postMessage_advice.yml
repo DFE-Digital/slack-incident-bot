@@ -1,0 +1,83 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/chat.postMessage
+    body:
+      encoding: UTF-8
+      string: channel=C027ZFNML6Q&text=Welcome+to+the+incident+channel.+Please+review+the+following+docs%3A%0A%3E+%3Chttps%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1QN72Gom-M6bysVqC8Enq0crOqE_cFT82tBfMy1djF6s%2Fedit%7CIncident+playbook%3E+%0A%3E%3Chttps%3A%2F%2Fdocs.google.com%2Fdocument%2Fd%2F1uUeoUiXejyB5XnVjWniDvX3nzoxdRj1I%2Fedit%7CIncident+categorisation%3E&token=token
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.17.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 12 Jul 2021 17:03:36 GMT
+      Server:
+      - Apache
+      X-Xss-Protection:
+      - '0'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Slack-Req-Id:
+      - 02b8569c5693e87be319927f8554361a
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - no-referrer
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      X-Slack-Backend:
+      - r
+      X-Oauth-Scopes:
+      - users:read,channels:read,groups:read,chat:write,commands,incoming-webhook,team:read,channels:manage,pins:write
+      X-Accepted-Oauth-Scopes:
+      - chat:write
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Content-Length:
+      - '506'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Envoy-Upstream-Service-Time:
+      - '64'
+      X-Backend:
+      - main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow
+        main_control_with_overflow main_bedrock_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-2u3c
+      X-Via:
+      - envoy-www-iad-wte2, haproxy-edge-lhr-te12
+      X-Slack-Shared-Secret-Outcome:
+      - shared-secret
+      Via:
+      - envoy-www-iad-wte2
+    body:
+      encoding: UTF-8
+      string: '{"ok":true,"channel":"C027ZFNML6Q","ts":"1626109416.000300","message":{"bot_id":"B022U61DV7S","type":"message","text":"Welcome
+        to the incident channel. Please review the following docs:\n&gt; <https:\/\/docs.google.com\/document\/d\/1QN72Gom-M6bysVqC8Enq0crOqE_cFT82tBfMy1djF6s\/edit|Incident
+        playbook> \n&gt;<https:\/\/docs.google.com\/document\/d\/1uUeoUiXejyB5XnVjWniDvX3nzoxdRj1I\/edit|Incident
+        categorisation>","user":"U0224J2AHJP","ts":"1626109416.000300","team":"T01SF1W8V17","bot_profile":{"id":"B022U61DV7S","deleted":false,"name":"DFE
+        incident bot","updated":1621345614,"app_id":"A021D8M1RT9","icons":{"image_36":"https:\/\/avatars.slack-edge.com\/2021-05-18\/2069959218038_3f98a351ff3a2af9a2c9_36.jpg","image_48":"https:\/\/avatars.slack-edge.com\/2021-05-18\/2069959218038_3f98a351ff3a2af9a2c9_48.jpg","image_72":"https:\/\/avatars.slack-edge.com\/2021-05-18\/2069959218038_3f98a351ff3a2af9a2c9_72.jpg"},"team_id":"T01SF1W8V17"}}}'
+  recorded_at: Mon, 12 Jul 2021 17:03:36 GMT
+recorded_with: VCR 6.0.0
