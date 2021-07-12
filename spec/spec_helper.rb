@@ -6,7 +6,20 @@ require 'active_support'
 Bundler.require
 
 require 'slack-ruby-bot-server/rspec'
+require 'vcr'
+require 'webmock/rspec'
 require 'database_cleaner'
+
+VCR.configure do |config|
+  config.cassette_library_dir = 'spec/fixtures/slack'
+  config.hook_into :webmock
+  # config.default_cassette_options = { record: :new_episodes }
+  config.configure_rspec_metadata!
+  config.before_record do |i|
+    i.request.body.gsub!(ENV['SLACK_API_TOKEN'], 'token') if ENV.key?('SLACK_API_TOKEN')
+    i.response.body.force_encoding('UTF-8')
+  end
+end
 
 db_config = YAML.safe_load(File.read(File.expand_path('../config/postgresql.yml', __dir__)), [], [],
                            true)[ENV['RACK_ENV']]

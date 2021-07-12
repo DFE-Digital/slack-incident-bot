@@ -32,7 +32,7 @@ class SlackIncidentActions
     end
 
     message = client.chat_postMessage(channel: channel_name,
-                                      text: "Welcome to the incident channel. Please review the following docs:\n> <https://docs.google.com/document/d/1QN72Gom-M6bysVqC8Enq0crOqE_cFT82tBfMy1djF6s/edit#heading=h.pu6me2z5fcxt|Incident playbook> \n><https://docs.google.com/document/d/1uUeoUiXejyB5XnVjWniDvX3nzoxdRj1I/edit|Incident categorisation>")
+                                      text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
     threads << Thread.new { client.pins_add(channel: channel_name, timestamp: message[:ts]) }
 
     threads.each(&:join)

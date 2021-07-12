@@ -30,10 +30,8 @@ describe 'actions/slack_incident_listener' do
       end
 
       it 'logs the action' do
-        Logger.stub(:new).and_return(logger)
-        allow(logger).to receive(:info)
+        expect_any_instance_of(Logger).to receive(:info).with('Received view_submission.')
         post '/api/slack/action', payload: payload.to_json
-        expect(logger).to have_received(:info).with('Received view_submission.')
         expect(last_response.status).to eq 204
       end
     end

@@ -56,6 +56,8 @@ GEM
       minitest (~> 5.1)
       tzinfo (~> 1.1)
       zeitwerk (~> 2.2, >= 2.2.2)
+    addressable (2.8.0)
+      public_suffix (>= 2.0.2, < 5.0)
     async (1.29.0)
       console (~> 1.10)
       nio4r (~> 2.3)
@@ -73,6 +75,8 @@ GEM
     concurrent-ruby (1.1.8)
     console (1.12.0)
       fiber-local
+    crack (0.4.5)
+      rexml
     crass (1.0.6)
     database_cleaner (2.0.1)
       database_cleaner-active_record (~> 2.0.0)
@@ -139,6 +143,7 @@ GEM
       roar (~> 1.1.0)
     grape-swagger (1.4.0)
       grape (~> 1.3)
+    hashdiff (1.0.1)
     hashie (4.1.0)
     hashie-forbidden_attributes (0.1.1)
       hashie (>= 3.0)
@@ -177,6 +182,7 @@ GEM
     pry (0.14.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
+    public_suffix (4.0.6)
     puma (4.3.8)
       nio4r (~> 2.0)
     racc (1.5.2)
@@ -224,6 +230,7 @@ GEM
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
       uber (< 0.2.0)
+    rexml (3.2.5)
     roar (1.1.0)
       representable (~> 3.0.0)
     rspec (3.10.0)
@@ -288,6 +295,11 @@ GEM
     tzinfo (1.2.9)
       thread_safe (~> 0.1)
     uber (0.1.0)
+    vcr (6.0.0)
+    webmock (3.13.0)
+      addressable (>= 2.3.6)
+      crack (>= 0.3.2)
+      hashdiff (>= 0.4.0, < 2.0.0)
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
@@ -320,6 +332,8 @@ DEPENDENCIES
   spring
   spring-watcher-listen (~> 2.0.0)
   standalone_migrations
+  vcr
+  webmock
 
 RUBY VERSION
    ruby 2.7.2p137

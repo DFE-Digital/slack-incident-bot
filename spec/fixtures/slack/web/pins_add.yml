@@ -1,0 +1,79 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://slack.com/api/pins.add
+    body:
+      encoding: UTF-8
+      string: channel=C027ZFNML6Q&timestamp=1626109416.000300&token=xoxb-1899064301041-2072614357635-XleXN6moQhiuQqLSfjnE4u1W
+    headers:
+      Accept:
+      - application/json; charset=utf-8
+      User-Agent:
+      - Slack Ruby Client/0.17.0
+      Content-Type:
+      - application/x-www-form-urlencoded
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Date:
+      - Mon, 12 Jul 2021 17:04:20 GMT
+      Server:
+      - Apache
+      X-Xss-Protection:
+      - '0'
+      Pragma:
+      - no-cache
+      Cache-Control:
+      - private, no-cache, no-store, must-revalidate
+      Access-Control-Allow-Origin:
+      - "*"
+      Strict-Transport-Security:
+      - max-age=31536000; includeSubDomains; preload
+      X-Slack-Req-Id:
+      - 8a02bbd2351ba7d4807869e8763e7c35
+      X-Content-Type-Options:
+      - nosniff
+      Referrer-Policy:
+      - no-referrer
+      Access-Control-Expose-Headers:
+      - x-slack-req-id, retry-after
+      X-Slack-Backend:
+      - r
+      X-Oauth-Scopes:
+      - users:read,channels:read,groups:read,chat:write,commands,incoming-webhook,team:read,channels:manage,pins:write
+      X-Accepted-Oauth-Scopes:
+      - pins:write
+      Expires:
+      - Mon, 26 Jul 1997 05:00:00 GMT
+      Vary:
+      - Accept-Encoding
+      Access-Control-Allow-Headers:
+      - slack-route, x-slack-version-ts, x-b3-traceid, x-b3-spanid, x-b3-parentspanid,
+        x-b3-sampled, x-b3-flags
+      Content-Length:
+      - '31'
+      Content-Type:
+      - application/json; charset=utf-8
+      X-Envoy-Upstream-Service-Time:
+      - '69'
+      X-Backend:
+      - main_normal main_bedrock_normal_with_overflow main_canary_with_overflow main_bedrock_canary_with_overflow
+        main_control_with_overflow main_bedrock_control_with_overflow
+      X-Server:
+      - slack-www-hhvm-main-iad-op3e
+      X-Via:
+      - envoy-www-iad-vyxs, haproxy-edge-lhr-ws7r
+      X-Slack-Shared-Secret-Outcome:
+      - shared-secret
+      Via:
+      - envoy-www-iad-vyxs
+    body:
+      encoding: UTF-8
+      string: '{"ok":true}'
+  recorded_at: Mon, 12 Jul 2021 17:04:20 GMT
+recorded_with: VCR 6.0.0
