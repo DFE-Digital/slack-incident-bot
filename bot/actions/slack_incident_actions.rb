@@ -35,6 +35,8 @@ class SlackIncidentActions
                                       text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
     threads << Thread.new { client.pins_add(channel: channel_name, timestamp: message[:ts]) }
 
+    threads << Thread.new { client.chat_postMessage(channel: channel_name, text: "<@#{incident_tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template> and consider starting a video call.") }
+
     threads.each(&:join)
   end
 end
