@@ -7,9 +7,17 @@ SlackRubyBotServer::Events.configure do |config|
 
       slack_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
 
-      slack_client.chat_postMessage(channel: 'general', text: ":white_check_mark: <!here> The incident in <##{channel_id}> has now closed.")
-      message = slack_client.chat_postMessage(channel: channel_id, text: "<!here> This incident has now closed.")
-      slack_client.pins_add(channel: channel_id, timestamp: message[:ts])
-      { text: 'You’ve closed the incident.' }
+      begin
+        if channel_name.include? "incident"
+          message = slack_client.chat_postMessage(channel: channel_id, text: "<!here> This incident has now closed.")
+          slack_client.pins_add(channel: channel_id, timestamp: message[:ts])
+          slack_client.chat_postMessage(channel: 'general', text: ":white_check_mark: <!here> The incident in <##{channel_id}> has now closed.")
+          { text: 'You’ve closed the incident.' }
+        else
+          {text: 'This is not an incident channel.'}
+        end
+      rescue Slack::Web::Api::Errors::NotInChannel => e
+        { text: 'This is not an incident channel.'}
+      end
   end
 end
