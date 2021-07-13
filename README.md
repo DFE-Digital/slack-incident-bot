@@ -18,7 +18,7 @@ Incident management within Slack.
 - `users:read`
 4. Add the `BASE_URL` to **Redirect URLs** under **Interactivity & Shortcuts**
 3. Activate **Interactivity & Shortcuts** and add this url: `BASE_URL/api/slack/action` 
-4. Activate **Slash Commands** adding two slash commands:
+4. Activate **Slash Commands** adding three slash commands:
 - `/ping`
 - `/incident`
 - `/closeincident`  
