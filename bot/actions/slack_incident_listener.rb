@@ -13,6 +13,10 @@ SlackRubyBotServer::Events.configure do |config|
       slack_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
       slack_client.chat_postEphemeral(channel: action[:payload][:user][:id], user: action[:payload][:user][:id],
                                       text: 'That incident channel name has already been taken. Please try another.')
+    rescue Slack::Web::Api::Errors::CantInviteSelf => e
+      slack_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
+      slack_client.chat_postEphemeral(channel: action[:payload][:user][:id], user: action[:payload][:user][:id],
+                                      text: 'You can’t invite the bot to the channel. You’ll need to manually add the leads now.')
     end
     nil
   end
