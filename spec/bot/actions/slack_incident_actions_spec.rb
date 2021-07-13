@@ -34,15 +34,20 @@ describe 'actions/slack_incident_actions' do
   let(:timestamp) { { "ok": true, "ts": '1625836853.000800' } }
 
   it 'performs the incident actions' do
-    stub_request(:post, 'https://slack.com/api/conversations.create').to_return(status: 200, body: channel_id.to_json,
+    conversation_stub = stub_request(:post, 'https://slack.com/api/conversations.create').to_return(status: 200, body: channel_id.to_json,
                                                                                 headers: { 'Content-Type' => 'application/json' })
-    stub_request(:post, 'https://slack.com/api/conversations.invite').to_return(status: 200, body: '', headers: {})
-    stub_request(:post, 'https://slack.com/api/conversations.setTopic').to_return(status: 200, body: '', headers: {})
-    stub_request(:post, 'https://slack.com/api/chat.postMessage').to_return(status: 200, body: timestamp.to_json,
+    invite_stub = stub_request(:post, 'https://slack.com/api/conversations.invite').to_return(status: 200, body: '', headers: {})
+    topic_stub = stub_request(:post, 'https://slack.com/api/conversations.setTopic').to_return(status: 200, body: '', headers: {})
+    message_stub = stub_request(:post, 'https://slack.com/api/chat.postMessage').to_return(status: 200, body: timestamp.to_json,
                                                                             headers: { 'Content-Type' => 'application/json' })
-    stub_request(:post, 'https://slack.com/api/pins.add').to_return(status: 200, body: '', headers: {})
+    pin_stub = stub_request(:post, 'https://slack.com/api/pins.add').to_return(status: 200, body: '', headers: {})
 
     SlackIncidentActions.new.open_incident(incident_payload)
+    expect(conversation_stub).to have_been_requested
+    expect(invite_stub).to have_been_requested
+    expect(topic_stub).to have_been_requested
+    expect(message_stub).to have_been_requested.times(3)
+    expect(pin_stub).to have_been_requested
   end
 
   it 'sets a topic', vcr: { cassette_name: 'web/conversations_setTopic' } do
