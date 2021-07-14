@@ -164,6 +164,7 @@ GEM
     marcel (1.0.1)
     method_source (1.0.0)
     mini_mime (1.1.0)
+    mini_portile2 (2.5.3)
     minitest (5.14.4)
     msgpack (1.4.2)
     multi_json (1.15.0)
@@ -173,7 +174,12 @@ GEM
     mustermann-grape (1.0.1)
       mustermann (>= 1.0.0)
     nio4r (2.5.7)
+    nokogiri (1.11.4)
+      mini_portile2 (~> 2.5.0)
+      racc (~> 1.4)
     nokogiri (1.11.4-x86_64-darwin)
+      racc (~> 1.4)
+    nokogiri (1.11.4-x86_64-linux)
       racc (~> 1.4)
     otr-activerecord (2.0.0)
       activerecord (>= 4.0, < 6.3)
@@ -285,10 +291,6 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
-    standalone_migrations (6.0.0)
-      activerecord (>= 4.2.7, < 6.1.0, != 5.2.3.rc1, != 5.2.3)
-      railties (>= 4.2.7, < 6.1.0, != 5.2.3.rc1, != 5.2.3)
-      rake (>= 10.0)
     thor (1.1.0)
     thread_safe (0.3.6)
     timers (4.3.3)
@@ -306,7 +308,9 @@ GEM
     zeitwerk (2.4.2)
 
 PLATFORMS
+  ruby
   x86_64-darwin-19
+  x86_64-linux
 
 DEPENDENCIES
   activerecord
@@ -331,12 +335,11 @@ DEPENDENCIES
   slack-ruby-bot-server-events (~> 0.3.1)
   spring
   spring-watcher-listen (~> 2.0.0)
-  standalone_migrations
   vcr
   webmock
 
 RUBY VERSION
-   ruby 2.7.2p137
+   ruby 2.7.4p191
 
 BUNDLED WITH
-   2.2.17
+   2.2.23

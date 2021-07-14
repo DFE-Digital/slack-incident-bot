@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.2'
+ruby '2.7.4'
 
 # Load env variables
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -37,7 +37,8 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails', '~> 2.7', require: 'dotenv/rails-now'
-  gem 'standalone_migrations'
+  gem 'rspec'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -54,8 +55,6 @@ group :test do
   gem 'faker'
   gem 'rack-test'
   gem 'rake'
-  gem 'rspec'
-  gem 'rspec-rails'
   gem 'vcr'
   gem 'webmock'
 end
