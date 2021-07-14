@@ -27,8 +27,8 @@ class SlackIncidentActions
                                     topic: "Description: #{incident_description.capitalize}\n Priority: #{incident_priority}\n Comms lead: <@#{incident_comms_lead}>\n Tech lead: <@#{incident_tech_lead}>\n Support lead: <@#{incident_support_lead}>")
     end
     threads << Thread.new do
-      client.chat_postMessage(channel: 'general',
-                              text: ":rotating_light: <!here> A new incident has been opened :rotating_light:\n> *Title:* #{incident_title.capitalize} \n>*Priority:* #{incident_priority}\n>*Comms:* <##{channel_name}>")
+      client.chat_postMessage(channel: 'twd_bat',
+                              text: ":rotating_light: <!channel> A new incident has been opened :rotating_light:\n> *Title:* #{incident_title.capitalize} \n>*Priority:* #{incident_priority}\n>*Comms:* <##{channel_name}>")
     end
 
     message = client.chat_postMessage(channel: channel_name,
