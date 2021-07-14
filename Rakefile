@@ -17,7 +17,4 @@ begin
 rescue LoadError
 end
 
-require 'standalone_migrations'
-StandaloneMigrations::Tasks.load_tasks
-
-task default: ['db:create', 'db:migrate', :spec]
+task default: [:spec]
