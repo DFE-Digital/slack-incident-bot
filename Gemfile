@@ -38,6 +38,8 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails', '~> 2.7', require: 'dotenv/rails-now'
   gem 'standalone_migrations'
+  gem 'rspec'
+  gem 'rspec-rails'
 end
 
 group :development do
@@ -54,8 +56,6 @@ group :test do
   gem 'faker'
   gem 'rack-test'
   gem 'rake'
-  gem 'rspec'
-  gem 'rspec-rails'
   gem 'vcr'
   gem 'webmock'
 end
