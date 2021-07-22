@@ -12,6 +12,7 @@ SlackRubyBotServer::Events.configure do |config|
           message = slack_client.chat_postMessage(channel: channel_id, text: "<!here> This incident has now closed.")
           slack_client.pins_add(channel: channel_id, timestamp: message[:ts])
           slack_client.chat_postMessage(channel: 'twd_bat', text: ":white_check_mark: <!channel> The incident in <##{channel_id}> has now closed.")
+          slack_client.chat_postMessage(channel: 'twd_getintoteaching', text: ":white_check_mark: <!channel> The incident in <##{channel_id}> has now closed.")
           { text: 'You’ve closed the incident.' }
         else
           {text: 'This is not an incident channel.'}

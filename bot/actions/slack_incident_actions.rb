@@ -31,6 +31,11 @@ class SlackIncidentActions
                               text: ":rotating_light: <!channel> A new incident has been opened :rotating_light:\n> *Title:* #{incident_title.capitalize} \n>*Priority:* #{incident_priority}\n>*Comms:* <##{channel_name}>")
     end
 
+    threads << Thread.new do
+      client.chat_postMessage(channel: 'twd_getintoteaching',
+                              text: ":rotating_light: <!channel> A new incident has been opened :rotating_light:\n> *Title:* #{incident_title.capitalize} \n>*Priority:* #{incident_priority}\n>*Comms:* <##{channel_name}>")
+    end
+
     message = client.chat_postMessage(channel: channel_name,
                                       text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
     threads << Thread.new { client.pins_add(channel: channel_name, timestamp: message[:ts]) }
