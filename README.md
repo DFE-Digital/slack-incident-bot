@@ -1,13 +1,13 @@
 # DfE Incident Bot
-Incident management within Slack.
+Incident management within Slack – `/incident`
 
-<img src="https://user-images.githubusercontent.com/47917431/125347757-38394480-e353-11eb-92de-879f0d23632a.png" width="500" />
+<img src="https://user-images.githubusercontent.com/47917431/133457741-3ceb2612-0230-4ce7-bdb9-43fa37c7b9ef.gif" width="70%">
 
 
 ## Local Setup
 
 1. Request an invite to the **Slack Bot Testing Grounds** workspace & a copy of the secrets for you `.env` file
-2. Visit api.slack.com/apps and select **DfE incident bot (test)**
+2. Visit https://api.slack.com/apps and select **DfE incident bot (test)**
 3. Spin up a ngrok tunnel with `ngrok http 3000` and take a copy of the forwarding URL
 4. Navigate to **Interactivity & Shortcuts** and add the following URL to **Request URL**:
 - https://example.ngrok.io/api/slack/action
@@ -18,7 +18,7 @@ Incident management within Slack.
 7. Update your `.env` file with the following URLs:
 - `BASE_URL=https://example.ngrok.io`
 - `ENV_URL=example.ngrok.io`
-8. Launch your rails server and test the connection in slack with `/ping`
+8. Launch your rails server and test the connection in Slack with `/ping`
 ## New App Setup
 **BASE_URL** stands for https://your-slackbot-hosted-domain.com hereafter
 1. Create a new app [here](https://api.slack.com/apps?new_app=1)
