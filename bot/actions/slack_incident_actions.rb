@@ -40,7 +40,71 @@ class SlackIncidentActions
                                       text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
     threads << Thread.new { client.pins_add(channel: channel_name, timestamp: message[:ts]) }
 
-    threads << Thread.new { client.chat_postMessage(channel: channel_name, text: "<@#{incident_tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template> and consider starting a video call.") }
+    threads << Thread.new do
+      client.chat_postMessage(channel: channel_name,
+                              text: "<@#{incident_tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template> and consider starting a video call.")
+    end
+
+    threads.each(&:join)
+  end
+
+  def update_incident(modal_data)
+    payload_values = modal_data[:payload][:view][:state][:values]
+
+    new_incident_description = payload_values.dig(:incident_description_block, :incident_description, :value)
+    new_incident_priority = payload_values.dig(:incident_priority_block, :incident_priority, :selected_option, :text,
+                                               :text)
+    new_incident_comms_lead = payload_values.dig(:incident_comms_lead_block, :comms_lead_select_action, :selected_user)
+    new_incident_tech_lead = payload_values.dig(:incident_tech_lead_block, :tech_lead_select_action, :selected_user)
+    new_incident_support_lead = payload_values.dig(:incident_support_lead_block, :support_lead_select_action,
+                                                   :selected_user)
+
+    client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
+
+    channel_name = modal_data[:payload][:response_urls][0][:channel_id]
+
+    current_topic = client.conversations_info(channel: channel_name).dig(:channel, :topic, :value)
+
+    current_topic_clean = current_topic.split("\n").map(&:strip)
+
+    old_incident_description = current_topic_clean[0]
+    old_incident_priority = current_topic_clean[1]
+    old_incident_comms_lead = current_topic_clean[2]
+    old_incident_tech_lead = current_topic_clean[3]
+    old_incident_support_lead = current_topic_clean[4]
+
+    description_text = new_incident_description.nil? ? old_incident_description : "Description: #{new_incident_description.capitalize}"
+    priority_text = new_incident_priority.nil? ? old_incident_priority : "Priority: #{new_incident_priority}"
+    comms_lead_text = new_incident_comms_lead.nil? ? old_incident_comms_lead : "Comms lead: <@#{new_incident_comms_lead}>"
+    tech_lead_text = new_incident_tech_lead.nil? ? old_incident_tech_lead : "Tech lead: <@#{new_incident_tech_lead}>"
+    support_lead_text = new_incident_support_lead.nil? ? old_incident_support_lead : "Support lead: <@#{new_incident_support_lead}>"
+
+    topic_text = [description_text, priority_text, comms_lead_text, tech_lead_text, support_lead_text].join("\n ")
+
+    current_members = client.conversations_members(channel: channel_name).members
+
+    user_invite_list = []
+
+    user_invite_list << new_incident_comms_lead unless current_members.include? new_incident_comms_lead
+    user_invite_list << new_incident_tech_lead unless current_members.include? new_incident_tech_lead
+    user_invite_list << new_incident_support_lead unless current_members.include? new_incident_support_lead
+
+    user_invite_list_text = user_invite_list.join(',')
+
+    threads = []
+    threads << Thread.new { client.conversations_setTopic(channel: channel_name, topic: topic_text) }
+
+    unless topic_text == current_topic
+      threads << Thread.new do
+        client.chat_postMessage(channel: channel_name, text: 'Incident has been updated')
+      end
+    end
+
+    unless user_invite_list.compact.empty?
+      threads << Thread.new do
+        client.conversations_invite(channel: channel_name, users: user_invite_list_text)
+      end
+    end
 
     threads.each(&:join)
   end

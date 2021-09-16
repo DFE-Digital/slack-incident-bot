@@ -5,7 +5,11 @@ SlackRubyBotServer::Events.configure do |config|
     begin
       if action[:payload][:view][:app_id] == ENV['SLACK_APP_ID']
         t1 = Time.zone.now
-        SlackIncidentActions.new.open_incident(action)
+        if action[:payload][:view][:callback_id] == 'incident-update-modal-identifier'
+          SlackIncidentActions.new.update_incident(action)
+        else
+          SlackIncidentActions.new.open_incident(action)
+        end
         t2 = Time.zone.now
         puts t2 - t1
       end
