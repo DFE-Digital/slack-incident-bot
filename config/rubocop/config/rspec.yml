@@ -1,0 +1,52 @@
+require: rubocop-rspec
+
+RSpec/NestedGroups:
+  Enabled: true
+  Max: 4
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
+
+RSpec/ContextWording:
+  Enabled: false
+
+RSpec/LetSetup:
+  Enabled: false
+
+# This cop wants us to use `expect().to change(Candidate, :count)` instead
+# of `expect().to change { Candidate.count }`, which does not seem better.
+RSpec/ExpectChange:
+  Enabled: false
+
+RSpec/LeadingSubject:
+  Enabled: false
+
+# In acceptance tests it's often handy to user instance variables to keep track of state
+RSpec/InstanceVariable:
+  Enabled: false
+
+RSpec/PredicateMatcher:
+  Enabled: false
+
+RSpec/DescribeClass:
+  Enabled: false
+
+RSpec/MultipleMemoizedHelpers:
+  Enabled: false
+
+RSpec/StubbedMock:
+  Enabled: true
+
+RSpec/Capybara/FeatureMethods:
+  EnabledMethods:
+    - feature
+    - scenario
+
+RSpec/AnyInstance:
+  Enabled: false
+
+RSpec/VerifiedDoubles:
+  Enabled: false
