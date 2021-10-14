@@ -6,7 +6,7 @@ class SlackIncidentActions
 
   def open_incident(slack_action)
     incident = SlackIncidentModal.new(slack_action)
-    start_time = Time.new.strftime('%y%m%d')
+    start_time = Time.zone.now.strftime('%y%m%d')
     channel_name = "incident_#{incident.service.downcase}_#{start_time}_#{incident.title.parameterize.underscore}"
 
     threads = []
@@ -28,14 +28,14 @@ private
   def create_channel!(channel_name)
     slack_client.conversations_create(
       name: channel_name,
-      is_private: false
+      is_private: false,
     )
   end
 
   def invite_users!(channel_name, leads)
     slack_client.conversations_invite(
       channel: channel_name,
-      users: leads.join(',')
+      users: leads.join(','),
     )
   end
 
@@ -61,7 +61,7 @@ private
     message = slack_client.chat_postMessage(channel: channel_name,
                                             text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
     slack_client.pins_add(channel: channel_name, timestamp: message[:ts])
-    slack_client.chat_postMessage(channel: channel_name, text: "<@#{tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template> and consider starting a video call.") 
+    slack_client.chat_postMessage(channel: channel_name, text: "<@#{tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template> and consider starting a video call.")
   end
 
   def slack_client

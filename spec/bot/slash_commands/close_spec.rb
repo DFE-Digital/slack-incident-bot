@@ -23,7 +23,7 @@ describe 'slash_commands/close' do
           channel_name: 'incident_channel_name',
           user_id: 'user_id',
           team_id: 'team_id',
-          token: 'deprecated'
+          token: 'deprecated',
         }
       end
 
@@ -46,7 +46,7 @@ describe 'slash_commands/close' do
           channel_name: 'channel_name',
           user_id: 'user_id',
           team_id: 'team_id',
-          token: 'deprecated'
+          token: 'deprecated',
         }
       end
 
