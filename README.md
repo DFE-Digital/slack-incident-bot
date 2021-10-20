@@ -1,5 +1,5 @@
-# DfE Incident Bot
-Incident management within Slack – `/incident`
+# DfE Incident Bot 🤖
+Incident management.. all within [Slack](https://slack.com/intl/en-gb/) – `/incident`
 
 <img src="https://user-images.githubusercontent.com/47917431/133457741-3ceb2612-0230-4ce7-bdb9-43fa37c7b9ef.gif" width="70%">
 
