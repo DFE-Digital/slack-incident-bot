@@ -5,7 +5,6 @@ ENV['RACK_ENV'] = 'test'
 require 'active_support'
 Bundler.require
 
-require 'slack-ruby-bot-server/rspec'
 require 'vcr'
 require 'webmock/rspec'
 require 'database_cleaner'

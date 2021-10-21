@@ -110,7 +110,6 @@ GEM
       dry-inflector (~> 0.1, >= 0.1.2)
       dry-logic (~> 1.0, >= 1.0.2)
     erubi (1.10.0)
-    fabrication (2.22.0)
     faker (2.19.0)
       i18n (>= 1.6, < 2)
     faraday (1.8.0)
@@ -329,7 +328,6 @@ DEPENDENCIES
   byebug
   database_cleaner
   dotenv-rails (~> 2.7)
-  fabrication
   faker
   listen (~> 3.2)
   otr-activerecord
