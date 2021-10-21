@@ -50,7 +50,6 @@ end
 
 group :test do
   gem 'async-websocket', '~> 0.8.0'
-  gem 'database_cleaner'
   gem 'faker'
   gem 'rack-test'
   gem 'rake'

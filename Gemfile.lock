@@ -78,12 +78,6 @@ GEM
     crack (0.4.5)
       rexml
     crass (1.0.6)
-    database_cleaner (2.0.1)
-      database_cleaner-active_record (~> 2.0.0)
-    database_cleaner-active_record (2.0.1)
-      activerecord (>= 5.a)
-      database_cleaner-core (~> 2.0.0)
-    database_cleaner-core (2.0.1)
     declarative (0.0.20)
     declarative-option (0.1.0)
     diff-lcs (1.4.4)
@@ -326,7 +320,6 @@ DEPENDENCIES
   async-websocket (~> 0.8.0)
   bootsnap (>= 1.4.2)
   byebug
-  database_cleaner
   dotenv-rails (~> 2.7)
   faker
   listen (~> 3.2)
