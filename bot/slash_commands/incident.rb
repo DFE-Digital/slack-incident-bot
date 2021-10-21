@@ -1,6 +1,5 @@
 SlackRubyBotServer::Events.configure do |config|
   config.on :command, '/incident' do |command|
-    p command
     command.logger.info "Someone raised an incident in channel #{command[:channel_name]}."
     slack_connection(command)
     nil

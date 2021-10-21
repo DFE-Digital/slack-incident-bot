@@ -7,7 +7,6 @@ SlackRubyBotServer::Events.configure do |config|
         t1 = Time.now
         SlackIncidentActions.new.open_incident(action)
         t2 = Time.now
-        puts t2 - t1
       end
     rescue Slack::Web::Api::Errors::NameTaken => e
       slack_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])

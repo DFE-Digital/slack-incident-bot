@@ -1,6 +1,5 @@
 SlackRubyBotServer::Events.configure do |config|
     config.on :command, '/closeincident' do |command|
-      p command
       channel_name = command[:channel_name]
       channel_id = command[:channel_id]
       command.logger.info "Closing the incident in #{channel_name}."
