@@ -9,3 +9,8 @@ Dir[Rails.root.join('bot', 'slash_commands', '**', '*.rb')].sort.each { |f| requ
 Dir[Rails.root.join('bot', 'actions', '**', '*.rb')].sort.each { |f| require f }
 
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+
+RSpec.configure do |config|
+  config.infer_spec_type_from_file_location!
+  config.example_status_persistence_file_path = 'tmp/rspec-examples.txt'
+end
