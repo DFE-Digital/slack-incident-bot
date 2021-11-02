@@ -1,0 +1,26 @@
+inherit_from:
+  - ./config/rubocop/config/rspec.yml
+  - ./config/rubocop/config/rails.yml
+  - ./config/rubocop/config/rake.yml
+  - ./config/rubocop/config/style.yml
+  - ./config/rubocop/config/layout.yml
+  - ./config/rubocop/config/lint.yml
+  - ./config/rubocop/config/metrics.yml
+  - ./config/rubocop/config/naming.yml
+
+AllCops:
+  NewCops: enable
+  Exclude:
+    - 'bin/*'
+    - 'db/schema.rb'
+    - 'node_modules/**/*'
+    - 'config/application.rb'
+    - 'config/puma.rb'
+    - 'config/environments/*'
+    - 'config/initializers/nationalities.rb'
+    - 'features/support/env.rb'
+    - 'vendor/**/*'
+    - 'jmeter/**/*'
+
+Bundler/OrderedGems:
+  Enabled: false

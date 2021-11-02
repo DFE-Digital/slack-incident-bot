@@ -8,4 +8,4 @@ require 'rspec/rails'
 Dir[Rails.root.join('bot', 'slash_commands', '**', '*.rb')].sort.each { |f| require f }
 Dir[Rails.root.join('bot', 'actions', '**', '*.rb')].sort.each { |f| require f }
 
-Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/support/**/*.rb')].sort.each { |f| require f }

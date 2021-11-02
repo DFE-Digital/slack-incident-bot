@@ -21,15 +21,15 @@ describe 'actions/slack_incident_listener' do
     end
 
     context 'with a command' do
-      let(:logger) { double(Logger) }
       let(:payload) do
         {
           'type' => 'view_submission',
-          'view' => { 'app_id' => 'test' }
+          'view' => { 'app_id' => 'test' },
         }
       end
 
       it 'logs the action' do
+        instance_double(Logger)
         expect_any_instance_of(Logger).to receive(:info).with('Received view_submission.')
         post '/api/slack/action', payload: payload.to_json
         expect(last_response.status).to eq 204

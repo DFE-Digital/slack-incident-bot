@@ -1,0 +1,79 @@
+Style/AndOr:
+  EnforcedStyle: conditionals
+
+Style/StringLiterals:
+  Enabled: true
+  EnforcedStyle: single_quotes
+
+# sometimes reduce is fine
+Style/EachWithObject:
+  Enabled: false
+
+# This cop has too many false positives (it also requires underscores for things that are not numbers)
+Style/NumericLiterals:
+  Enabled: false
+
+# Sometimes it's easier to think about a negated if, for example `render_error if !model.valid?` vs `render_error unless model.valid?`
+Style/NegatedIf:
+  Enabled: false
+
+# 🤷‍♂️
+Style/AsciiComments:
+  Enabled: false
+
+Style/TrailingCommaInHashLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+Style/BlockDelimiters:
+  Enabled: true
+  Exclude:
+    - spec/**/**
+
+Style/Documentation:
+  Enabled: false
+
+Style/FormatStringToken:
+  EnforcedStyle: template
+
+Style/RegexpLiteral:
+  Enabled: true
+  EnforcedStyle: mixed
+  AllowInnerSlashes: true
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: true
+  EnforcedStyle: sprintf
+
+Style/GlobalStdStream:
+  Enabled: false
+
+Style/HashAsLastArrayItem:
+  Enabled: false
+
+Style/CaseLikeIf:
+  Enabled: false
+
+Style/ExplicitBlockArgument:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  AllowedMethods:
+    - perform

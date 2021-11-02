@@ -21,7 +21,7 @@ describe 'slash_commands/ping' do
           channel_name: 'channel_name',
           user_id: 'user_id',
           team_id: 'team_id',
-          token: 'deprecated'
+          token: 'deprecated',
         }
       end
 

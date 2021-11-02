@@ -27,19 +27,19 @@ describe 'actions/slack_incident_actions' do
                                                                                'selected_user' => 'U01RVKPGZDL' } },
                 'incident_support_lead_block' => { 'support_lead_select_action' => { 'type' => 'users_select',
                                                                                      'selected_user' => 'U01RVKPGZDL' } } } },
-            'app_id' => 'A021D8M1RT9' } }
+            'app_id' => 'A021D8M1RT9' } },
     }.with_indifferent_access
   end
-  let(:channel_id) { { "ok": true, "channel": { "id": 'C018Y6VH39D' } } }
-  let(:timestamp) { { "ok": true, "ts": '1625836853.000800' } }
+  let(:channel_id) { { ok: true, channel: { id: 'C018Y6VH39D' } } }
+  let(:timestamp) { { ok: true, ts: '1625836853.000800' } }
 
   it 'performs the incident actions' do
     conversation_stub = stub_request(:post, 'https://slack.com/api/conversations.create').to_return(status: 200, body: channel_id.to_json,
-                                                                                headers: { 'Content-Type' => 'application/json' })
+                                                                                                    headers: { 'Content-Type' => 'application/json' })
     invite_stub = stub_request(:post, 'https://slack.com/api/conversations.invite').to_return(status: 200, body: '', headers: {})
     topic_stub = stub_request(:post, 'https://slack.com/api/conversations.setTopic').to_return(status: 200, body: '', headers: {})
     message_stub = stub_request(:post, 'https://slack.com/api/chat.postMessage').to_return(status: 200, body: timestamp.to_json,
-                                                                            headers: { 'Content-Type' => 'application/json' })
+                                                                                           headers: { 'Content-Type' => 'application/json' })
     pin_stub = stub_request(:post, 'https://slack.com/api/pins.add').to_return(status: 200, body: '', headers: {})
 
     SlackIncidentActions.new.open_incident(incident_payload)

@@ -1,0 +1,33 @@
+
+Lint/DeprecatedOpenSSLConstant:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: true
+
+Lint/RaiseException:
+  Enabled: true
+
+Lint/StructNewOverride:
+  Enabled: true
+
+Lint/EmptyFile:
+  Enabled: true
+
+Lint/MissingSuper:
+  Enabled: false
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: true
+
+Lint/SymbolConversion:
+  Enabled: true
+
+Lint/DuplicateBranch:
+  Enabled: true
+
+Lint/EmptyBlock:
+  Enabled: true
+
+Lint/SuppressedException:
+  Enabled: false

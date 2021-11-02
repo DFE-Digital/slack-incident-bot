@@ -24,7 +24,7 @@ describe 'slash_commands/incident' do
           user_id: 'user_id',
           team_id: 'team_id',
           token: 'deprecated',
-          trigger_id: trigger_id
+          trigger_id: trigger_id,
         }
       end
 
