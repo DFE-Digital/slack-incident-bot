@@ -1,13 +1,13 @@
 class SlackIncidentActions
   def open_incident(modal_data)
-    payload_values = modal_data[:payload][:view][:state][:values]
-    incident_title = payload_values[:incident_title_block][:incident_title][:value]
-    incident_description = payload_values[:incident_description_block][:incident_description][:value]
-    incident_service = payload_values[:service_selection_block][:service_selection][:selected_option][:text][:text]
-    incident_priority = payload_values[:incident_priority_block][:incident_priority][:selected_option][:text][:text]
-    incident_comms_lead = payload_values[:incident_comms_lead_block][:comms_lead_select_action][:selected_user]
-    incident_tech_lead = payload_values[:incident_tech_lead_block][:tech_lead_select_action][:selected_user]
-    incident_support_lead = payload_values[:incident_support_lead_block][:support_lead_select_action][:selected_user]
+    payload_values = modal_data.dig(:payload, :view, :state, :values)
+    incident_title = payload_values.dig(:incident_title_block, :incident_title, :value)
+    incident_description = payload_values.dig(:incident_description_block, :incident_description, :value)
+    incident_service = payload_values.dig(:service_selection_block, :service_selection, :selected_option, :text, :text)
+    incident_priority = payload_values.dig(:incident_priority_block, :incident_priority, :selected_option, :text, :text)
+    incident_comms_lead = payload_values.dig(:incident_comms_lead_block, :comms_lead_select_action, :selected_user)
+    incident_tech_lead = payload_values.dig(:incident_tech_lead_block, :tech_lead_select_action, :selected_user)
+    incident_support_lead = payload_values.dig(:incident_support_lead_block, :support_lead_select_action, :selected_user)
 
     incident_start = Time.zone.now.strftime('%y%m%d')
     client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
@@ -48,7 +48,7 @@ class SlackIncidentActions
     threads.each(&:join)
   end
 
-  def update_incident(modal_data)
+  def update_incident(modal_data, channel_id)
     payload_values = modal_data[:payload][:view][:state][:values]
 
     new_incident_description = payload_values.dig(:incident_description_block, :incident_description, :value)
@@ -61,9 +61,7 @@ class SlackIncidentActions
 
     client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
 
-    channel_name = modal_data[:payload][:response_urls][0][:channel_id]
-
-    current_topic = client.conversations_info(channel: channel_name).dig(:channel, :topic, :value)
+    current_topic = client.conversations_info(channel: channel_id).dig(:channel, :topic, :value)
 
     current_topic_clean = current_topic.split("\n").map(&:strip)
 

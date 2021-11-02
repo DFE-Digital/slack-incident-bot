@@ -142,20 +142,6 @@
 				},
 				"action_id": "support_lead_select_action"
 			}
-		},
-        {
-			"block_id": "my_block_id",
-			"type": "input",
-			"label": {
-				"type": "plain_text",
-				"text": "Updating this channel"
-			},
-			"element": {
-				"action_id": "my_action_id",
-				"type": "conversations_select",
-				"default_to_current_conversation": true,
-				"response_url_enabled": true
-			}
 		}
 	]
 }

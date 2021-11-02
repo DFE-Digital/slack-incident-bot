@@ -6,7 +6,8 @@ SlackRubyBotServer::Events.configure do |config|
       if action[:payload][:view][:app_id] == ENV['SLACK_APP_ID']
         t1 = Time.zone.now
         if action[:payload][:view][:callback_id] == 'incident-update-modal-identifier'
-          SlackIncidentActions.new.update_incident(action)
+          channel_id = Rails.cache.read(action[:payload][:view][:id])
+          SlackIncidentActions.new.update_incident(action, channel_id)
         else
           SlackIncidentActions.new.open_incident(action)
         end
