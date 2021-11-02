@@ -14,7 +14,6 @@ describe 'slash_commands/incident' do
 
     context 'with a command' do
       let!(:web_client) { SlackMock.web_client }
-      let!(:team) { Fabricate(:team) }
       let(:trigger_id) { '12345.98765.abcd2358fdea' }
       let(:command) do
         {

@@ -1,47 +1,70 @@
 class SlackIncidentActions
-  def open_incident(modal_data)
-    payload_values = modal_data[:payload][:view][:state][:values]
-    incident_title = payload_values[:incident_title_block][:incident_title][:value]
-    incident_description = payload_values[:incident_description_block][:incident_description][:value]
-    incident_service = payload_values[:service_selection_block][:service_selection][:selected_option][:text][:text]
-    incident_priority = payload_values[:incident_priority_block][:incident_priority][:selected_option][:text][:text]
-    incident_comms_lead = payload_values[:incident_comms_lead_block][:comms_lead_select_action][:selected_user]
-    incident_tech_lead = payload_values[:incident_tech_lead_block][:tech_lead_select_action][:selected_user]
-    incident_support_lead = payload_values[:incident_support_lead_block][:support_lead_select_action][:selected_user]
+  CHANNELS_TO_NOTIFY = %w[
+    twd_bat
+    twd_getintoteaching
+  ].freeze
 
-    incident_start = Time.new.strftime('%y%m%d')
-    client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
-
-    create_channel = client.conversations_create(
-      name: "incident_#{incident_service.downcase}_#{incident_start}_#{incident_title.parameterize.underscore}", is_private: false
-    )
-    channel_name = create_channel[:channel][:id]
+  def open_incident(slack_action)
+    incident = SlackIncidentModal.new(slack_action)
+    start_time = Time.new.strftime('%y%m%d')
+    channel_name = "incident_#{incident.service.downcase}_#{start_time}_#{incident.title.parameterize.underscore}"
 
     threads = []
-    threads << Thread.new do
-      client.conversations_invite(channel: channel_name,
-                                  users: "#{incident_comms_lead},#{incident_tech_lead},#{incident_support_lead}")
-    end
-    threads << Thread.new do
-      client.conversations_setTopic(channel: channel_name,
-                                    topic: "Description: #{incident_description.capitalize}\n Priority: #{incident_priority}\n Comms lead: <@#{incident_comms_lead}>\n Tech lead: <@#{incident_tech_lead}>\n Support lead: <@#{incident_support_lead}>")
-    end
-    threads << Thread.new do
-      client.chat_postMessage(channel: 'twd_bat',
-                              text: ":rotating_light: <!channel> A new incident has been opened :rotating_light:\n> *Title:* #{incident_title.capitalize} \n>*Priority:* #{incident_priority}\n>*Comms:* <##{channel_name}>")
-    end
 
-    threads << Thread.new do
-      client.chat_postMessage(channel: 'twd_getintoteaching',
-                              text: ":rotating_light: <!channel> A new incident has been opened :rotating_light:\n> *Title:* #{incident_title.capitalize} \n>*Priority:* #{incident_priority}\n>*Comms:* <##{channel_name}>")
+    threads << Thread.new { create_channel!(channel_name) }
+    threads << Thread.new { invite_users!(channel_name, incident.leads) }
+    threads << Thread.new { set_channel_details!(channel_name, summary_for(incident)) }
+    threads << Thread.new { introduce_incident!(channel_name, incident.tech_lead) }
+
+    CHANNELS_TO_NOTIFY.each do |channel_to_notify|
+      threads << Thread.new { notify_channel!(channel_to_notify, channel_name, incident.title, incident.priority) }
     end
-
-    message = client.chat_postMessage(channel: channel_name,
-                                      text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
-    threads << Thread.new { client.pins_add(channel: channel_name, timestamp: message[:ts]) }
-
-    threads << Thread.new { client.chat_postMessage(channel: channel_name, text: "<@#{incident_tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template> and consider starting a video call.") }
 
     threads.each(&:join)
+  end
+
+private
+
+  def create_channel!(channel_name)
+    slack_client.conversations_create(
+      name: channel_name,
+      is_private: false
+    )
+  end
+
+  def invite_users!(channel_name, leads)
+    slack_client.conversations_invite(
+      channel: channel_name,
+      users: leads.join(',')
+    )
+  end
+
+  def summary_for(incident)
+    "Description: #{incident.description.capitalize}\n Priority: #{incident.priority}\n Comms lead: <@#{incident.comms_lead}>\n Tech lead: <@#{incident.tech_lead}>\n Support lead: <@#{incident.support_lead}>"
+  end
+
+  def set_channel_details!(channel_name, summary)
+    slack_client.conversations_setTopic(
+      channel: channel_name,
+      topic: summary,
+    )
+  end
+
+  def notify_channel!(channel, incident_channel_name, title, priority)
+    notification_text = ":rotating_light: <!channel> A new incident has been opened :rotating_light:\n> *Title:* #{title.capitalize} \n>*Priority:* #{priority}\n>*Comms:* <##{incident_channel_name}>"
+
+    slack_client.chat_postMessage(channel: channel,
+                                  text: notification_text)
+  end
+
+  def introduce_incident!(channel_name, tech_lead)
+    message = slack_client.chat_postMessage(channel: channel_name,
+                                            text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
+    slack_client.pins_add(channel: channel_name, timestamp: message[:ts])
+    slack_client.chat_postMessage(channel: channel_name, text: "<@#{tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template> and consider starting a video call.") 
+  end
+
+  def slack_client
+    @_client ||= Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
   end
 end

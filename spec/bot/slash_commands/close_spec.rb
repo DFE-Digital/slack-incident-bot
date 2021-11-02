@@ -13,7 +13,6 @@ describe 'slash_commands/close' do
     end
 
     context 'with a valid incident channel' do
-      let!(:team) { Fabricate(:team) }
       let!(:web_client) { SlackMock.web_client }
 
       let(:command) do
@@ -37,7 +36,6 @@ describe 'slash_commands/close' do
     end
 
     context 'with an invalid incident channel' do
-      let!(:team) { Fabricate(:team) }
       let!(:web_client) { SlackMock.web_client }
 
       let(:command) do
