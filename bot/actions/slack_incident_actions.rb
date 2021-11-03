@@ -24,7 +24,42 @@ class SlackIncidentActions
     threads.each(&:join)
   end
 
+  def update_incident(slack_action, channel_id)
+    incident = SlackUpdateModal.new(slack_action)
+    current_summary = current_summary(channel_id)
+
+    updated_summary = incident.summary_text(current_summary)
+
+    current_members = current_members(channel_id)
+
+    user_invite_list = incident.create_member_invite_list(current_members)
+
+    threads = []
+    unless updated_summary == current_summary
+      threads << Thread.new { set_channel_details!(channel_id, updated_summary) }
+      threads << Thread.new { notify_channel_of_update!(channel_id) }
+    end
+
+    unless user_invite_list.compact.empty?
+      threads << Thread.new { invite_users!(channel_id, user_invite_list) }
+    end
+
+    threads.each(&:join)
+  end
+
 private
+
+  def current_summary(channel_id)
+    slack_client.conversations_info(
+      channel: channel_id,
+    ).dig(:channel, :topic, :value)
+  end
+
+  def current_members(channel_id)
+    slack_client.conversations_members(
+      channel: channel_id,
+    ).members
+  end
 
   def create_channel!(channel_name)
     slack_client.conversations_create(
@@ -56,6 +91,11 @@ private
 
     slack_client.chat_postMessage(channel: channel,
                                   text: notification_text)
+  end
+
+  def notify_channel_of_update!(channel_id)
+    slack_client.chat_postMessage(channel: channel_id,
+                                  text: 'Incident has been updated')
   end
 
   def introduce_incident!(channel_id, tech_lead)
