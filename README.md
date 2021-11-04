@@ -11,7 +11,7 @@ Incident management.. all within [Slack](https://slack.com/intl/en-gb/) – `/in
 3. Spin up a ngrok tunnel with `ngrok http 3000` and take a copy of the forwarding URL
 4. Navigate to **Interactivity & Shortcuts** and add the following URL to **Request URL**:
 - https://example.ngrok.io/api/slack/action
-5. Navigate to **Slash Commands** and add the following URL to the three slash commands:
+5. Navigate to **Slash Commands** and add the following URL to the four slash commands:
 - https://example.ngrok.io/api/slack/command
 6. Navigate to **OAuth & Permissions** and add the following URL to **Redirect URLS**:
 - https://example.ngrok.io
