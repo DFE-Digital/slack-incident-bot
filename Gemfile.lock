@@ -180,10 +180,6 @@ GEM
     nokogiri (1.12.5)
       mini_portile2 (~> 2.6.1)
       racc (~> 1.4)
-    nokogiri (1.12.5-x86_64-darwin)
-      racc (~> 1.4)
-    nokogiri (1.12.5-x86_64-linux)
-      racc (~> 1.4)
     otr-activerecord (2.0.2)
       activerecord (>= 4.0, < 6.3)
       hashie-forbidden_attributes (~> 0.1)
@@ -235,6 +231,7 @@ GEM
     rb-fsevent (0.11.0)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.4.0)
     representable (3.0.4)
       declarative (< 0.1.0)
       declarative-option (< 0.2.0)
@@ -330,6 +327,7 @@ DEPENDENCIES
   rack-test
   rails (~> 6.0.3, >= 6.0.4.1)
   rake
+  redis
   rspec
   rspec-rails
   slack-ruby-bot-server (~> 1.2.0)
