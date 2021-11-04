@@ -34,10 +34,11 @@ Incident management.. all within [Slack](https://slack.com/intl/en-gb/) – `/in
 - `users:read`
 3. Activate **Interactivity & Shortcuts** and add this url: `BASE_URL/api/slack/action`
 4. Activate **OAuth & Permissions** and add `BASE_URL` to the **Redirect URLs**
-5. Activate **Slash Commands** adding three slash commands:
+5. Activate **Slash Commands** adding four slash commands:
 - `/ping`
 - `/incident`
 - `/closeincident`
+- `/update`
 and use this url as the **Request URL**: `BASE_URL/api/slack/command`
 6. Grab the infomation needed for .env file from Basic Information section
 7. Navigate to the **App Home** page and toggle **Always Show My Bot as Online** (according to your reference)
