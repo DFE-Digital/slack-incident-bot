@@ -1,6 +1,6 @@
 class SlackIncidentActions
   CHANNELS_TO_NOTIFY = %w[
-    twd_bat
+    twd_git_bat
     twd_getintoteaching
   ].freeze
 
