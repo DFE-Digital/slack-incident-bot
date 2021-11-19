@@ -12,17 +12,23 @@ SlackRubyBotServer::Events.configure do |config|
         end
       end
     rescue Slack::Web::Api::Errors::NameTaken
-      slack_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
-      slack_client.chat_postEphemeral(channel: action[:payload][:user][:id], user: action[:payload][:user][:id],
-                                      text: 'That incident channel name has already been taken. Please try another.')
+      SlackMethods.post_a_message_to_user(
+        user_id,
+        user_id,
+        'That incident channel name has already been taken. Please try another.',
+      )
     rescue Slack::Web::Api::Errors::CantInviteSelf
-      slack_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
-      slack_client.chat_postEphemeral(channel: action[:payload][:user][:id], user: action[:payload][:user][:id],
-                                      text: 'You can’t invite the bot to the channel. You’ll need to manually add the leads now.')
+      SlackMethods.post_a_message_to_user(
+        user_id,
+        user_id,
+        'You can’t invite the bot to the channel. You’ll need to manually add the leads now.',
+      )
     rescue Slack::Web::Api::Errors::TooLong
-      slack_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
-      slack_client.chat_postEphemeral(channel: action[:payload][:user][:id], user: action[:payload][:user][:id],
-                                      text: 'Your incident description was too long. You’ll need to manually add it now.')
+      SlackMethods.post_a_message_to_user(
+        user_id,
+        user_id,
+        'Your incident description was too long. You’ll need to manually add it now.',
+      )
     end
     nil
   end
