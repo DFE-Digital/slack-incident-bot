@@ -3,11 +3,9 @@ SlackRubyBotServer::Events.configure do |config|
     channel_name = command[:channel_name]
     channel_id = command[:channel_id]
 
-    slack_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
-
     begin
       if channel_name.include? 'incident'
-        slack_client.views_open(trigger_id: command[:trigger_id], view: update_payload)
+        SlackMethods.open_the_modal(command[:trigger_id], update_payload)
         Rails.cache.write('channel', channel_id)
         { text: 'You’ve updated the incident.' }
       else
