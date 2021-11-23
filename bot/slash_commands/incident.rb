@@ -1,5 +1,6 @@
 SlackRubyBotServer::Events.configure do |config|
   config.on :command, '/incident' do |command|
+    Rails.cache.write('channel_calling_incident', command[:channel_id])
     SlackMethods.open_the_modal(command[:trigger_id], incident_payload)
     nil
   end
