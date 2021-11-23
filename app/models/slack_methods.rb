@@ -85,6 +85,6 @@ class SlackMethods
   end
 
   def self.slack_client
-    @_client ||= Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
+    @_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
   end
 end
