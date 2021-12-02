@@ -1,10 +1,5 @@
 class SlackIncidentActions
-  CHANNELS_TO_NOTIFY = %w[
-    twd_git_bat
-    twd_getintoteaching
-  ].freeze
-
-  def open_incident(slack_action)
+  def open_incident(slack_action, channel_calling_incident)
     incident = SlackIncidentModal.new(slack_action)
     start_time = Time.zone.now.strftime('%y%m%d')
     channel_name = "incident_#{incident.service.downcase}_#{start_time}_#{incident.title.parameterize.underscore}"
@@ -16,10 +11,7 @@ class SlackIncidentActions
     threads << Thread.new { SlackMethods.invite_users!(channel_id, incident.leads) }
     threads << Thread.new { SlackMethods.set_channel_details!(channel_id, SlackMethods.summary_for(incident)) }
     threads << Thread.new { SlackMethods.introduce_incident!(channel_id, incident.tech_lead) }
-
-    CHANNELS_TO_NOTIFY.each do |channel_to_notify|
-      threads << Thread.new { SlackMethods.notify_channel!(channel_to_notify, channel_id, incident.title, incident.priority) }
-    end
+    threads << Thread.new { SlackMethods.notify_channel!(channel_calling_incident, channel_id, incident.title, incident.priority) }
 
     threads.each(&:join)
   end

@@ -63,11 +63,11 @@ describe 'actions/slack_incident_actions' do
                                                                                            headers: { 'Content-Type' => 'application/json' })
     pin_stub = stub_request(:post, 'https://slack.com/api/pins.add').to_return(status: 200, body: '', headers: {})
 
-    SlackIncidentActions.new.open_incident(incident_payload)
+    SlackIncidentActions.new.open_incident(incident_payload, channel_id)
     expect(conversation_stub).to have_been_requested
     expect(invite_stub).to have_been_requested
     expect(topic_stub).to have_been_requested
-    expect(message_stub).to have_been_requested.times(4)
+    expect(message_stub).to have_been_requested.times(3)
     expect(pin_stub).to have_been_requested
   end
 
