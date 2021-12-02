@@ -27,7 +27,6 @@ describe 'slash_command/update' do
     end
 
     it 'returns incident updated confirmation' do
-      allow_any_instance_of(Logger).to receive(:info).with('Updating the incident in incident_channel_name')
       post '/api/slack/command', command
       expect(last_response.status).to eq 201
       expect(JSON.parse(last_response.body)).to eq('text' => 'You’ve updated the incident.')
@@ -50,7 +49,6 @@ describe 'slash_command/update' do
     end
 
     it 'returns the error message' do
-      allow_any_instance_of(Logger).to receive(:info).with('Updating the incident in channel_name')
       post '/api/slack/command', command
       expect(last_response.status).to eq 201
       expect(JSON.parse(last_response.body)).to eq('text' => 'This is not an incident channel.')

@@ -28,7 +28,6 @@ describe 'slash_commands/close' do
       end
 
       it 'returns incident closed confirmation' do
-        expect_any_instance_of(Logger).to receive(:info).with('Closing the incident in incident_channel_name.')
         post '/api/slack/command', command
         expect(last_response.status).to eq 201
         expect(JSON.parse(last_response.body)).to eq('text' => 'You’ve closed the incident.')
@@ -51,7 +50,6 @@ describe 'slash_commands/close' do
       end
 
       it 'returns incident closed confirmation' do
-        expect_any_instance_of(Logger).to receive(:info).with('Closing the incident in channel_name.')
         post '/api/slack/command', command
         expect(last_response.status).to eq 201
         expect(JSON.parse(last_response.body)).to eq('text' => 'This is not an incident channel.')
