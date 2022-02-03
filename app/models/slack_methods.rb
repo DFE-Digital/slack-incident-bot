@@ -74,7 +74,13 @@ class SlackMethods
     message = slack_client.chat_postMessage(channel: channel_id,
                                             text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
     slack_client.pins_add(channel: channel_id, timestamp: message[:ts])
-    slack_client.chat_postMessage(channel: channel_id, text: "<@#{tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template> and consider starting a video call.")
+    slack_client.chat_postMessage(channel: channel_id, text: "<@#{tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template>.")
+  end
+
+  def self.start_meet!(channel_id)
+    message = slack_client.chat_postMessage(channel: channel_id,
+                                            text: "Join the <#{ENV['MEETS_LINK']}|incident call.>")
+    slack_client.pins_add(channel: channel_id, timestamp: message[:ts])
   end
 
   def self.open_the_modal(trigger_id, view_payload)
