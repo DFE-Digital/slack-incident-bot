@@ -67,8 +67,8 @@ describe 'actions/slack_incident_actions' do
     expect(conversation_stub).to have_been_requested
     expect(invite_stub).to have_been_requested
     expect(topic_stub).to have_been_requested
-    expect(message_stub).to have_been_requested.times(3)
-    expect(pin_stub).to have_been_requested
+    expect(message_stub).to have_been_requested.times(4)
+    expect(pin_stub).to have_been_requested.times(2)
   end
 
   it 'performs the update action' do
