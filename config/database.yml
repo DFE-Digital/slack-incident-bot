@@ -3,6 +3,10 @@ default: &default
   pool: 10
   timeout: 5000
   encoding: unicode
+  host: <%= ENV['POSTGRES_HOST'] %>
+  username: <%= ENV['POSTGRES_USER'] %>
+  password: <%= ENV['POSTGRES_PASSWORD'] %>
+  database: <%= ENV['DB_DATABASE'] %>
 
 development:
   <<: *default
