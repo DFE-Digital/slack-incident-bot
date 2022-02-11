@@ -84,7 +84,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "TTAPI",
+              "text": "Qualified Teachers API",
               "emoji": true
             },
             "value": "value-2"
@@ -92,7 +92,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Multiple",
+              "text": "TTAPI",
               "emoji": true
             },
             "value": "value-3"
@@ -100,10 +100,18 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Other",
+              "text": "Multiple",
               "emoji": true
             },
             "value": "value-4"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Other",
+              "emoji": true
+            },
+            "value": "value-5"
           }
         ]
       }
