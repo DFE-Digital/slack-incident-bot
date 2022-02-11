@@ -2,7 +2,7 @@ class SlackIncidentActions
   def open_incident(slack_action, channel_calling_incident)
     incident = SlackIncidentModal.new(slack_action)
     start_time = Time.zone.now.strftime('%y%m%d')
-    channel_name = "incident_#{incident.service.downcase}_#{start_time}_#{incident.title.parameterize.underscore}"
+    channel_name = "incident_#{incident.service.downcase.parameterize.underscore}_#{start_time}_#{incident.title.parameterize.underscore}"
     channel = SlackMethods.create_channel!(channel_name)
     channel_id = channel[:channel][:id]
 
