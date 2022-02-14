@@ -336,7 +336,7 @@ DEPENDENCIES
   pry
   puma (~> 4.3)
   rack-test
-  rails (~> 6.1, >= 6.0.4.2)
+  rails (~> 6.1, >= 6.1.4.4)
   rake
   redis
   rspec
