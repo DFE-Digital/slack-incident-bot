@@ -83,6 +83,24 @@ class SlackMethods
     slack_client.pins_add(channel: channel_id, timestamp: message[:ts])
   end
 
+  def self.users_name(user)
+    slack_client.users_info(
+      user: user,
+    )[:user][:profile][:first_name]
+  end
+
+  def self.user_id(user)
+    slack_client.users_info(
+      user: user,
+    )[:user][:id]
+  end
+
+  def self.channel_name(channel_id)
+    slack_client.conversations_info(
+      channel: channel_id,
+    )[:channel][:name]
+  end
+
   def self.open_the_modal(trigger_id, view_payload)
     slack_client.views_open(
       trigger_id: trigger_id,
