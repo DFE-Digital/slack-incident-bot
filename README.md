@@ -6,7 +6,7 @@ Incident management.. all within [Slack](https://slack.com/intl/en-gb/) – `/in
 
 ## Local Setup
 
-1. Request an invite to the **Slack Bot Testing Grounds** workspace & a copy of the secrets for you `.env` file
+1. Request an invite to the **Slack Bot Testing Grounds** workspace & a copy of the secrets for your `.env` file
 2. Visit https://api.slack.com/apps and select **DfE incident bot (test)**
 3. Spin up a ngrok tunnel with `ngrok http 3000` and take a copy of the forwarding URL
 4. Navigate to **Interactivity & Shortcuts** and add the following URL to **Request URL**:
