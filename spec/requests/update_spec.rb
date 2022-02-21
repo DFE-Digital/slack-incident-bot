@@ -1,57 +1,51 @@
 require 'rails_helper'
 
 describe 'slash_command/update' do
-  include Rack::Test::Methods
-
-  def app
-    SlackRubyBotServer::Api::Middleware.instance
-  end
+  include SlackHelper
 
   before do
-    allow_any_instance_of(Slack::Events::Request).to receive(:verify!)
+    disable_slack_signature_checks!
   end
 
   context 'with a valid update command' do
-    let!(:web_client) { SlackMock.web_client }
-
-    let(:command) do
-      {
+    let(:payload) do
+      default_slash_command_payload.merge({
         command: '/update',
-        text: '',
         channel_id: 'channel',
         channel_name: 'incident_channel_name',
-        user_id: 'user_id',
-        team_id: 'team_id',
-        token: 'deprecated',
-      }
+        trigger_id: 'test-trigger-id',
+      })
     end
 
     it 'returns incident updated confirmation' do
-      post '/api/slack/command', command
-      expect(last_response.status).to eq 201
-      expect(JSON.parse(last_response.body)).to eq('text' => 'You’ve updated the incident.')
+      view_payload = JSON.generate(
+        JSON.parse(
+          File.read(Rails.root.join('lib/view_payloads/update.json')),
+        )
+      )
+
+      stub_slack_open_view(trigger_id: 'test-trigger-id', view_payload: view_payload)
+      post '/api/slack/command', params: payload
+      expect(JSON.parse(response.body)).to eq('text' => 'You’ve updated the incident.')
+      expect(response.status).to eq 201
     end
   end
 
   context 'with an invalid update command' do
-    let!(:web_client) { SlackMock.web_client }
-
-    let!(:command) do
-      {
+    let(:payload) do
+      default_slash_command_payload.merge({
         command: '/update',
-        text: '',
         channel_id: 'channel',
-        channel_name: 'channel_name',
-        user_id: 'user_id',
-        team_id: 'team_id',
-        token: 'deprecated',
-      }
+        channel_name: 'unrelated_channel_name',
+        trigger_id: 'test-trigger-id',
+      })
     end
 
     it 'returns the error message' do
-      post '/api/slack/command', command
-      expect(last_response.status).to eq 201
-      expect(JSON.parse(last_response.body)).to eq('text' => 'This is not an incident channel.')
+      post '/api/slack/command', params: payload
+
+      expect(response.status).to eq 201
+      expect(JSON.parse(response.body)).to eq('text' => 'This is not an incident channel.')
     end
   end
 end
