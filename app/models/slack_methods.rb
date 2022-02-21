@@ -77,9 +77,9 @@ class SlackMethods
     slack_client.chat_postMessage(channel: channel_id, text: "<@#{tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template>.")
   end
 
-  def self.start_meet!(channel_id)
+  def self.start_meet!(channel_id, meet_name)
     message = slack_client.chat_postMessage(channel: channel_id,
-                                            text: "Join the <#{ENV['MEETS_LINK']}|incident call.>")
+                                            text: "Join the <http://g.co/meet/#{meet_name}|incident meeting>")
     slack_client.pins_add(channel: channel_id, timestamp: message[:ts])
   end
 
