@@ -1,36 +1,23 @@
 require 'rails_helper'
 
 describe 'slash_commands/ping' do
-  include Rack::Test::Methods
+  include SlackHelper
 
-  def app
-    SlackRubyBotServer::Api::Middleware.instance
+  before do
+    disable_slack_signature_checks!
   end
 
-  context 'without signature checks' do
-    before do
-      allow_any_instance_of(Slack::Events::Request).to receive(:verify!)
+  context 'with a command' do
+    let(:payload) do
+      default_slash_command_payload.merge({
+        command: '/ping',
+      })
     end
 
-    context 'with a command' do
-      let(:command) do
-        {
-          command: '/ping',
-          text: '`',
-          channel_id: 'channel',
-          channel_name: 'channel_name',
-          user_id: 'user_id',
-          team_id: 'team_id',
-          token: 'deprecated',
-        }
-      end
-
-      it 'returns pong' do
-        expect_any_instance_of(Logger).to receive(:info).with('Received a ping, responding with pong.')
-        post '/api/slack/command', command
-        expect(last_response.status).to eq 201
-        expect(JSON.parse(last_response.body)).to eq('text' => 'pong')
-      end
+    it 'returns pong' do
+      post '/api/slack/command', params: payload
+      expect(JSON.parse(response.body)).to eq('text' => 'pong')
+      expect(response.status).to eq 201
     end
   end
 end
