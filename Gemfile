@@ -39,6 +39,10 @@ group :development, :test do
   gem 'dotenv-rails', '~> 2.7', require: 'dotenv/rails-now'
   gem 'rspec'
   gem 'rspec-rails'
+  gem 'rubocop'
+  gem 'rubocop-rspec'
+  gem 'rubocop-rails'
+  gem 'rubocop-rake'
 end
 
 group :development do
