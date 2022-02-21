@@ -15,6 +15,12 @@ module SlackHelper
     allow_any_instance_of(Incident).to receive(:calling_channel).and_return(calling_channel)
   end
 
+  def stub_slack_open_view(trigger_id:, view_payload:)
+    stub_request(:post, 'https://slack.com/api/views.open')
+      .with(body: { 'trigger_id' => trigger_id, 'view' => view_payload })
+      .to_return(status: 200, body: dummy_slack_response)
+  end
+
   def stub_slack_message(channel:, message:)
     stub_request(:post, 'https://slack.com/api/chat.postMessage')
       .with(body: { 'channel' => channel, 'text' => message })

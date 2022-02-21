@@ -1,37 +1,31 @@
 require 'rails_helper'
 
 describe 'slash_commands/incident' do
-  include Rack::Test::Methods
+  include SlackHelper
 
-  def app
-    SlackRubyBotServer::Api::Middleware.instance
+  before do
+    disable_slack_signature_checks!
   end
 
-  context 'without signature checks' do
-    before do
-      allow_any_instance_of(Slack::Events::Request).to receive(:verify!)
+  context 'with a command' do
+    let(:payload) do
+      default_slash_command_payload.merge({
+        command: '/incident',
+        trigger_id: 'test-trigger-id',
+      })
     end
 
-    context 'with a command' do
-      let!(:web_client) { SlackMock.web_client }
-      let(:trigger_id) { '12345.98765.abcd2358fdea' }
-      let(:command) do
-        {
-          command: '/incident',
-          text: '`',
-          channel_id: 'test',
-          channel_name: 'test_channel',
-          user_id: 'user_id',
-          team_id: 'team_id',
-          token: 'deprecated',
-          trigger_id: trigger_id,
-        }
-      end
+    it 'successfully processes the request' do
+      view_payload = JSON.generate(
+        JSON.parse(
+          File.read(Rails.root.join('lib/view_payloads/incident.json')),
+        )
+      )
 
-      it 'successfully processes the request' do
-        post '/api/slack/command', command
-        expect(last_response.status).to eq 204
-      end
+      stub_slack_open_view(trigger_id: 'test-trigger-id', view_payload: view_payload)
+      post '/api/slack/command', params: payload
+
+      expect(response.status).to eq 204
     end
   end
 end
