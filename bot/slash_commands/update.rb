@@ -6,7 +6,7 @@ SlackRubyBotServer::Events.configure do |config|
     begin
       if channel_name.include? 'incident'
         SlackMethods.open_the_modal(command[:trigger_id], update_payload)
-        Rails.cache.write('channel', channel_id)
+        Rails.cache.write('channel_id', channel_id)
         { text: 'You’ve updated the incident.' }
       else
         { text: 'This is not an incident channel.' }

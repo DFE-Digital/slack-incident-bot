@@ -6,7 +6,7 @@ SlackRubyBotServer::Events.configure do |config|
     begin
       if channel_name.include? 'incident'
         message = SlackMethods.post_a_message(channel_id, '<!here> This incident has now closed.')
-        incident = Incident.new(channel_id: channel_id, channel_name: channel_name)
+        incident = Incident.new(channel_id: channel_id)
 
         SlackMethods.pin_a_message(incident.channel_id, message[:ts])
 

@@ -1,0 +1,22 @@
+{
+  "payload": {
+    "type": "view_submission",
+    "user": {
+      "id": "1234"
+    },
+    "view": {
+      "callback_id": "incident-update-modal-identifier",
+      "app_id": "TEST_APP_ID",
+      "state": {
+        "values": {
+          "incident_support_lead_block": {
+            "support_lead_select_action": {
+              "type": "users_select",
+              "selected_user": "NEW_SUPPORT_LEAD"
+            }
+          }
+        }
+      }
+    }
+  }
+}

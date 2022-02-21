@@ -1,0 +1,72 @@
+{
+  "payload": {
+    "type": "view_submission",
+    "callback_id": "incident-modal-identifier",
+    "user": {
+      "id": "1234"
+    },
+    "view": {
+      "app_id": "TEST_APP_ID",
+      "state": {
+        "values": {
+          "incident_title_block": {
+            "incident_title": {
+              "type": "plain_text_input",
+              "value": "hello"
+            }
+          },
+          "incident_description_block": {
+            "incident_description": {
+              "type": "plain_text_input",
+              "value": "hello"
+            }
+          },
+          "service_selection_block": {
+            "service_selection": {
+              "type": "static_select",
+              "selected_option": {
+                "text": {
+                  "type": "plain_text",
+                  "text": "Apply",
+                  "emoji": true
+                },
+                "value": "value-0"
+              }
+            }
+          },
+          "incident_priority_block": {
+            "incident_priority": {
+              "type": "static_select",
+              "selected_option": {
+                "text": {
+                  "type": "plain_text",
+                  "text": "P1 (High) - 60-100% of users affected",
+                  "emoji": true
+                },
+                "value": "value-0"
+              }
+            }
+          },
+          "incident_comms_lead_block": {
+            "comms_lead_select_action": {
+              "type": "users_select",
+              "selected_user": "COMMS_LEAD"
+            }
+          },
+          "incident_tech_lead_block": {
+            "tech_lead_select_action": {
+              "type": "users_select",
+              "selected_user": "TECH_LEAD"
+            }
+          },
+          "incident_support_lead_block": {
+            "support_lead_select_action": {
+              "type": "users_select",
+              "selected_user": "SUPPORT_LEAD"
+            }
+          }
+        }
+      }
+    }
+  }
+}
