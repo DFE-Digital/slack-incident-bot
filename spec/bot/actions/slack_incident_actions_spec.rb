@@ -117,7 +117,7 @@ describe 'actions/slack_incident_actions' do
 
   it 'posts advice', vcr: { cassette_name: 'web/chat_postMessage_advice' } do
     rc = client.chat_postMessage(channel: 'C027ZFNML6Q',
-                                 text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
+                                 text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CONTACTS']}|Incident categorisation>")
     expect(rc.message.text).to include 'Welcome to the incident channel.'
   end
 

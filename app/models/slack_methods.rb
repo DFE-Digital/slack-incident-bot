@@ -72,7 +72,7 @@ class SlackMethods
 
   def self.introduce_incident!(channel_id, tech_lead)
     message = slack_client.chat_postMessage(channel: channel_id,
-                                            text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
+                                            text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CONTACTS']}|Incident contacts>")
     slack_client.pins_add(channel: channel_id, timestamp: message[:ts])
     slack_client.chat_postMessage(channel: channel_id, text: "<@#{tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template>.")
   end
