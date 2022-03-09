@@ -1,15 +1,13 @@
 SlackRubyBotServer::Events.configure do |config|
   config.on :action, 'view_submission' do |action|
-    action.logger.info "Received #{action[:payload][:type]}."
-
     begin
       if action[:payload][:view][:app_id] == ENV['SLACK_APP_ID']
+        incident = Incident.from_cache
+
         if action[:payload][:view][:callback_id] == 'incident-update-modal-identifier'
-          channel_id = Rails.cache.read('channel')
-          SlackIncidentActions.new.update_incident(action, channel_id)
+          SlackIncidentActions.new.update_incident(action, incident.channel_id)
         else
-          channel_calling_incident = Rails.cache.read('channel_calling_incident')
-          SlackIncidentActions.new.open_incident(action, channel_calling_incident)
+          SlackIncidentActions.new.open_incident(action, incident.calling_channel)
         end
       end
     rescue Slack::Web::Api::Errors::NameTaken

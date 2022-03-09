@@ -1,7 +1,11 @@
 class Incident
   include ActiveModel::Model
 
-  attr_accessor :channel_id, :channel_name
+  attr_accessor :channel_id
+
+  def self.from_cache
+    new(channel_id: Rails.cache.read('channel_id'))
+  end
 
   def calling_channel=(calling_channel)
     Rails.cache.write("#{channel_id}_calling_channel", calling_channel)
