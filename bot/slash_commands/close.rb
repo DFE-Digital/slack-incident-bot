@@ -6,11 +6,11 @@ SlackRubyBotServer::Events.configure do |config|
     begin
       if channel_name.include? 'incident'
         message = SlackMethods.post_a_message(channel_id, '<!here> This incident has now closed.')
-        incident = Incident.new(channel_id: channel_id, channel_name: channel_name)
+        channel_calling_incident = Rails.cache.read('channel_calling_incident')
 
-        SlackMethods.pin_a_message(incident.channel_id, message[:ts])
+        SlackMethods.pin_a_message(channel_id, message[:ts])
 
-        SlackMethods.post_a_message(incident.calling_channel, ":white_check_mark: <!channel> The incident in <##{incident.channel_id}> has now closed.")
+        SlackMethods.post_a_message(channel_calling_incident, ":white_check_mark: <!channel> The incident in <##{channel_id}> has now closed.")
 
         { text: 'You’ve closed the incident.' }
       else
