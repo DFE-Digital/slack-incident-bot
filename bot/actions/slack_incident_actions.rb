@@ -3,6 +3,7 @@ class SlackIncidentActions
     incident = SlackIncidentModal.new(slack_action)
     start_time = Time.zone.now.strftime('%y%m%d')
     channel_name = "incident_#{incident.service.downcase.parameterize.underscore}_#{start_time}_#{incident.title.parameterize.underscore}"
+    Rails.cache.write(channel_name, channel_calling_incident)
     channel = SlackMethods.create_channel!(channel_name)
     channel_id = channel[:channel][:id]
 
