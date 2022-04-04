@@ -49,6 +49,10 @@ module SlackHelper
       .to_return(status: 200, body: dummy_slack_response)
   end
 
+  def stub_user_message
+    stub_request(:post, 'https://slack.com/api/chat.postEphemeral')
+  end
+
   def stub_slack_pin(channel:)
     stub_request(:post, 'https://slack.com/api/pins.add')
       .with(body: { 'channel' => channel })
