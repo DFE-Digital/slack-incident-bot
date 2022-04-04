@@ -1,13 +1,19 @@
 SlackRubyBotServer::Events.configure do |config|
   config.on :command, '/incident' do |command|
-    Rails.cache.write('channel_calling_incident', command[:channel_id])
-    SlackMethods.open_the_modal(command[:trigger_id], incident_payload)
-    nil
+    case command[:text]
+    when 'open'
+      IncidentCommands::Open.perform(command)
+      nil
+    when 'update'
+      IncidentCommands::Update.perform(command)
+      nil
+    when 'close'
+      IncidentCommands::Close.perform(command)
+      nil
+    when 'help'
+      { text: "open: open a new incident \n update: update an ongoing incident \n close: close the incident" }
+    else
+      { text: 'This is not a valid command.' }
+    end
   end
-end
-
-def incident_payload
-  JSON.parse(
-    File.read(Rails.root.join('lib/view_payloads/incident.json')),
-  )
 end
