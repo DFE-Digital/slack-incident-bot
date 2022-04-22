@@ -17,8 +17,30 @@ module SlackHelper
 
   def stub_slack_open_view(trigger_id:, view_payload:)
     stub_request(:post, 'https://slack.com/api/views.open')
-      .with(body: { 'trigger_id' => trigger_id, 'view' => view_payload })
-      .to_return(status: 200, body: dummy_slack_response)
+      .with(
+        body: { 'trigger_id' => trigger_id, 'view' => view_payload },
+        headers: {
+          'Accept' => 'application/json; charset=utf-8',
+          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Content-Type' => 'application/x-www-form-urlencoded',
+          'User-Agent' => 'Slack Ruby Client/1.0.0',
+        },
+      )
+      .to_return(status: 200, body: dummy_slack_response, headers: {})
+  end
+
+  def stub_slack_ephemeral_error_message(channel:, message:)
+    stub_request(:post, 'https://slack.com/api/chat.postEphemeral')
+  .with(
+    body: { 'channel' => channel, 'text' => message, 'user' => channel },
+    headers: {
+      'Accept' => 'application/json; charset=utf-8',
+      'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+      'Content-Type' => 'application/x-www-form-urlencoded',
+      'User-Agent' => 'Slack Ruby Client/1.0.0',
+    },
+  )
+  .to_return(status: 200, body: dummy_slack_response, headers: {})
   end
 
   def stub_slack_message(channel:, message:)
