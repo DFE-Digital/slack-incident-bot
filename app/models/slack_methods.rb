@@ -90,6 +90,27 @@ class SlackMethods
     )
   end
 
+  def self.get_chat(channel_id)
+    slack_client.conversations_history(channel: channel_id)
+  end
+
+  def self.get_replies(channel_id, timestamp)
+    slack_client.conversations_replies(
+      channel: channel_id,
+      ts: timestamp,
+    )
+  end
+
+  def self.post_file(channel_id, content, filename, filetype, comment)
+    slack_client.files_upload(
+      channels: channel_id,
+      content: content,
+      filename: filename,
+      filetype: filetype,
+      initial_comment: comment,
+    )
+  end
+
   def self.slack_client
     @_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
   end
