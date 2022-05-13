@@ -1,59 +1,53 @@
 require 'rails_helper'
 
-describe 'slash_commands/close' do
-  include Rack::Test::Methods
+describe 'slash_commands/incident close' do
+  include SlackHelper
 
-  def app
-    SlackRubyBotServer::Api::Middleware.instance
+  before do
+    disable_slack_signature_checks!
+    incident_started_in('twd_git_bat')
   end
 
-  context 'without signature checks' do
-    before do
-      allow_any_instance_of(Slack::Events::Request).to receive(:verify!)
+  let(:payload) do
+    default_slash_command_payload.merge({
+      command: '/incident',
+      text: 'close',
+      channel_id: channel_id,
+      channel_name: channel_id,
+    })
+  end
+
+  context 'with a valid incident channel' do
+    let(:channel_id) { 'incident_channel_id' }
+    let(:channel_name) { 'incident_channel_name' }
+
+    it 'returns incident closed confirmation' do
+      stub_slack_message(channel: 'incident_channel_id', message: '<!here> This incident has now closed.')
+      pin_stub = stub_slack_pin(channel: 'incident_channel_id')
+      stub_slack_message(channel: 'twd_git_bat', message: ':white_check_mark: <!channel> The incident in <#incident_channel_id> has now closed.')
+      allow(Rails).to receive_message_chain(:cache, :read).and_return('twd_git_bat')
+
+      post '/api/slack/command', params: payload
+
+      expect(a_request(:post, 'https://slack.com/api/chat.postMessage')).to have_been_requested.times(2)
+      expect(pin_stub).to have_been_requested
+      expect(response.status).to eq 204
     end
+  end
 
-    context 'with a valid incident channel' do
-      let!(:web_client) { SlackMock.web_client }
+  context 'with an invalid incident channel' do
+    let(:channel_id) { 'some_other_channel_id' }
+    let(:channel_name) { 'some_other_channel_name' }
 
-      let(:command) do
-        {
-          command: '/closeincident',
-          text: '`',
-          channel_id: 'channel',
-          channel_name: 'incident_channel_name',
-          user_id: 'user_id',
-          team_id: 'team_id',
-          token: 'deprecated',
-        }
-      end
+    it 'returns an error message' do
+      user_message_stub = stub_user_message
 
-      it 'returns incident closed confirmation' do
-        post '/api/slack/command', command
-        expect(last_response.status).to eq 201
-        expect(JSON.parse(last_response.body)).to eq('text' => 'You’ve closed the incident.')
-      end
-    end
+      post '/api/slack/command', params: payload
 
-    context 'with an invalid incident channel' do
-      let!(:web_client) { SlackMock.web_client }
-
-      let(:command) do
-        {
-          command: '/closeincident',
-          text: '`',
-          channel_id: 'channel',
-          channel_name: 'channel_name',
-          user_id: 'user_id',
-          team_id: 'team_id',
-          token: 'deprecated',
-        }
-      end
-
-      it 'returns incident closed confirmation' do
-        post '/api/slack/command', command
-        expect(last_response.status).to eq 201
-        expect(JSON.parse(last_response.body)).to eq('text' => 'This is not an incident channel.')
-      end
+      expect(user_message_stub).to have_been_requested
+      expect(a_request(:post, 'https://slack.com/api/chat.postMessage')).not_to have_been_made
+      expect(a_request(:post, 'https://slack.com/api/pins.add')).not_to have_been_requested
+      expect(response.status).to eq 204
     end
   end
 end

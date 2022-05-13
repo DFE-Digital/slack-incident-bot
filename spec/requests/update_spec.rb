@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe 'slash_command/update' do
+describe 'slash_command/incident update' do
   include SlackHelper
 
   before do
@@ -10,7 +10,8 @@ describe 'slash_command/update' do
   context 'with a valid update command' do
     let(:payload) do
       default_slash_command_payload.merge({
-        command: '/update',
+        command: '/incident',
+        text: 'update',
         channel_id: 'channel',
         channel_name: 'incident_channel_name',
         trigger_id: 'test-trigger-id',
@@ -18,23 +19,28 @@ describe 'slash_command/update' do
     end
 
     it 'returns incident updated confirmation' do
-      view_payload = JSON.generate(
-        JSON.parse(
-          File.read(Rails.root.join('lib/view_payloads/update.json')),
-        )
+      modal_json = JSON.parse(File.read(Rails.root.join('lib/view_payloads/update.json')))
+
+      view_payload = modal_json.merge(
+        {
+          'private_metadata' => payload[:channel_id],
+        },
       )
 
-      stub_slack_open_view(trigger_id: 'test-trigger-id', view_payload: view_payload)
+      open_view_stub = stub_slack_open_view(trigger_id: 'test-trigger-id', view_payload: JSON.generate(view_payload))
+
       post '/api/slack/command', params: payload
-      expect(JSON.parse(response.body)).to eq('text' => 'You’ve updated the incident.')
-      expect(response.status).to eq 201
+
+      expect(open_view_stub).to have_been_requested
+      expect(response.status).to eq 204
     end
   end
 
   context 'with an invalid update command' do
     let(:payload) do
       default_slash_command_payload.merge({
-        command: '/update',
+        command: '/incident',
+        text: 'update',
         channel_id: 'channel',
         channel_name: 'unrelated_channel_name',
         trigger_id: 'test-trigger-id',
@@ -42,10 +48,12 @@ describe 'slash_command/update' do
     end
 
     it 'returns the error message' do
+      error_message = stub_slack_ephemeral_error_message(channel: 'user_id', message: 'This is not an incident channel.')
+
       post '/api/slack/command', params: payload
 
-      expect(response.status).to eq 201
-      expect(JSON.parse(response.body)).to eq('text' => 'This is not an incident channel.')
+      expect(response.status).to eq 204
+      expect(error_message).to have_been_requested
     end
   end
 end
