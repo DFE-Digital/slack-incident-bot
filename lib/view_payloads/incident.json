@@ -100,7 +100,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Multiple",
+              "text": "Register",
               "emoji": true
             },
             "value": "value-4"
@@ -108,10 +108,18 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Other",
+              "text": "Multiple",
               "emoji": true
             },
             "value": "value-5"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Other",
+              "emoji": true
+            },
+            "value": "value-6"
           }
         ]
       }
