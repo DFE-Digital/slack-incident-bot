@@ -4,7 +4,9 @@ describe 'actions/slack_incident_actions' do
   let(:client) { Slack::Web::Client.new(token: ENV['SLACK_TOKEN']) }
   let(:incident_payload) do
     {
-      'payload' => { 'view' =>
+      'payload' =>
+      { 'user' => { 'id' => 'U01RVKPGZDL' },
+        'view' =>
           { 'state' =>
             { 'values' =>
               { 'incident_title_block' => { 'incident_title' => { 'type' => 'plain_text_input', 'value' => 'hello' } },

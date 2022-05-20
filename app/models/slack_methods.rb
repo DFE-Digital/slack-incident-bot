@@ -40,12 +40,12 @@ class SlackMethods
     )
   end
 
-  def self.invite_users!(channel_id, leads)
-    return if leads.compact.blank?
+  def self.invite_users!(channel_id, leads, declarer = nil)
+    invitee = leads.compact.blank? ? declarer : leads.join(',')
 
     slack_client.conversations_invite(
       channel: channel_id,
-      users: leads.join(','),
+      users: invitee,
     )
   end
 
@@ -76,12 +76,15 @@ class SlackMethods
                                   text: 'Incident has been updated')
   end
 
-  def self.introduce_incident!(channel_id, tech_lead)
+  def self.introduce_incident!(channel_id, tech_lead, declarer)
     message = slack_client.chat_postMessage(channel: channel_id,
                                             text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
     slack_client.pins_add(channel: channel_id, timestamp: message[:ts])
-    lead = tech_lead.nil? ? '<!channel>' : "<@#{tech_lead}>"
-    slack_client.chat_postMessage(channel: channel_id, text: "#{lead} please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template>.")
+    if tech_lead.nil?
+      slack_client.chat_postMessage(channel: channel_id, text: "<@#{declarer}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template> and invite the leads.")
+    else
+      slack_client.chat_postMessage(channel: channel_id, text: "<@#{tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template>.")
+    end
   end
 
   def self.start_meet!(channel_id, meet_name)

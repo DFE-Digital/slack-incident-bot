@@ -1,7 +1,8 @@
 class SlackIncidentModal
-  attr_reader :title, :description, :service, :priority, :comms_lead, :tech_lead, :support_lead
+  attr_reader :title, :description, :service, :priority, :comms_lead, :tech_lead, :support_lead, :slack_response
 
   def initialize(slack_response)
+    @slack_response = slack_response
     payload_from_modal = slack_response[:payload][:view][:state][:values]
 
     @title = payload_from_modal[:incident_title_block][:incident_title][:value]
@@ -15,5 +16,9 @@ class SlackIncidentModal
 
   def leads
     [@comms_lead, @tech_lead, @support_lead]
+  end
+
+  def declarer
+    slack_response[:payload][:user][:id]
   end
 end
