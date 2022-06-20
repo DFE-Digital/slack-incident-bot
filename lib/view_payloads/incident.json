@@ -116,7 +116,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Multiple",
+              "text": "Apply for QTS",
               "emoji": true
             },
             "value": "value-6"
@@ -124,10 +124,18 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Other",
+              "text": "Multiple",
               "emoji": true
             },
             "value": "value-7"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Other",
+              "emoji": true
+            },
+            "value": "value-8"
           }
         ]
       }
