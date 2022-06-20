@@ -9,9 +9,9 @@ class SlackIncidentActions
 
     threads = []
 
-    threads << Thread.new { SlackMethods.invite_users!(channel_id, incident.leads) }
+    threads << Thread.new { SlackMethods.invite_users!(channel_id, incident.leads, incident.declarer) }
     threads << Thread.new { SlackMethods.set_channel_details!(channel_id, SlackMethods.summary_for(incident)) }
-    threads << Thread.new { SlackMethods.introduce_incident!(channel_id, incident.tech_lead) }
+    threads << Thread.new { SlackMethods.introduce_incident!(channel_id, incident.tech_lead, incident.declarer) }
     threads << Thread.new { SlackMethods.notify_channel!(channel_calling_incident, channel_id, incident.title, incident.priority) }
     threads << Thread.new { SlackMethods.start_meet!(channel_id, incident.title.parameterize) }
 
