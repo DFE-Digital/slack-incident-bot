@@ -108,7 +108,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Multiple",
+              "text": "Find a lost TRN",
               "emoji": true
             },
             "value": "value-5"
@@ -116,10 +116,26 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Other",
+              "text": "Apply for QTS",
               "emoji": true
             },
             "value": "value-6"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Multiple",
+              "emoji": true
+            },
+            "value": "value-7"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Other",
+              "emoji": true
+            },
+            "value": "value-8"
           }
         ]
       }
