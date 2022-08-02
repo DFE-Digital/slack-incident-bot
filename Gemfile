@@ -5,7 +5,7 @@ ruby '2.7.4'
 
 # Load env variables
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1', '>= 6.1.5.1'
+gem 'rails', '~> 7.0'
 # Use Puma as the app server
 gem 'puma', '~> 4.3'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
