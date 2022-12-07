@@ -124,7 +124,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Multiple",
+              "text": "Refer serious misconduct",
               "emoji": true
             },
             "value": "value-7"
@@ -132,10 +132,18 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Other",
+              "text": "Multiple",
               "emoji": true
             },
             "value": "value-8"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Other",
+              "emoji": true
+            },
+            "value": "value-9"
           }
         ]
       }
