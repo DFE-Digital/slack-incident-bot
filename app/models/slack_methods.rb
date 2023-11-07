@@ -40,15 +40,21 @@ class SlackMethods
     )
   end
 
-  def self.invite_users!(channel_id, leads)
+  def self.invite_users!(channel_id, leads, declarer = nil)
+    invitee = leads.compact.blank? ? declarer : leads.join(',')
+
     slack_client.conversations_invite(
       channel: channel_id,
-      users: leads.join(','),
+      users: invitee,
     )
   end
 
   def self.summary_for(incident)
-    "Description: #{incident.description.capitalize}\n Priority: #{incident.priority}\n Comms lead: <@#{incident.comms_lead}>\n Tech lead: <@#{incident.tech_lead}>\n Support lead: <@#{incident.support_lead}>"
+    summary = "Description: #{incident.description.capitalize}\n Priority: #{incident.priority}\n"
+    summary << "Comms lead: <@#{incident.comms_lead}>\n" unless incident.comms_lead.nil?
+    summary << "Tech lead: <@#{incident.tech_lead}>\n" unless incident.tech_lead.nil?
+    summary << "Support lead: <@#{incident.support_lead}>" unless incident.support_lead.nil?
+    summary
   end
 
   def self.set_channel_details!(channel_id, summary)
@@ -70,11 +76,15 @@ class SlackMethods
                                   text: 'Incident has been updated')
   end
 
-  def self.introduce_incident!(channel_id, tech_lead)
+  def self.introduce_incident!(channel_id, tech_lead, declarer)
     message = slack_client.chat_postMessage(channel: channel_id,
                                             text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
     slack_client.pins_add(channel: channel_id, timestamp: message[:ts])
-    slack_client.chat_postMessage(channel: channel_id, text: "<@#{tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template>.")
+    if tech_lead.nil?
+      slack_client.chat_postMessage(channel: channel_id, text: "<@#{declarer}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template> and invite the leads.")
+    else
+      slack_client.chat_postMessage(channel: channel_id, text: "<@#{tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template>.")
+    end
   end
 
   def self.start_meet!(channel_id, meet_name)
