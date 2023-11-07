@@ -132,7 +132,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Multiple",
+              "text": "Access you teaching qualifications",
               "emoji": true
             },
             "value": "value-8"
@@ -140,10 +140,26 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Other",
+              "text": "Check a teacher's record",
               "emoji": true
             },
             "value": "value-9"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Multiple",
+              "emoji": true
+            },
+            "value": "value-10"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Other",
+              "emoji": true
+            },
+            "value": "value-11"
           }
         ]
       }
