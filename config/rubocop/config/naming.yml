@@ -9,7 +9,7 @@ Naming/MemoizedInstanceVariableName:
 Naming/AccessorMethodName:
   Enabled: true
 
-Naming/PredicateName:
+Naming/PredicatePrefix:
   Enabled: true
 
 Naming/VariableNumber:

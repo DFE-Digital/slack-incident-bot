@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 describe 'actions/slack_incident_actions' do
-  let(:client) { Slack::Web::Client.new(token: ENV['SLACK_TOKEN']) }
+  let(:client) { Slack::Web::Client.new(token: ENV.fetch('SLACK_TOKEN', nil)) }
   let(:incident_payload) do
     {
       'payload' => { 'view' =>

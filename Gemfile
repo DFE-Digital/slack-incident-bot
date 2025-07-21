@@ -1,13 +1,13 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.7.4'
+ruby '3.2.3'
 
 # Load env variables
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 6.1', '>= 6.1.5.1'
+gem 'rails', '~> 7.0'
 # Use Puma as the app server
-gem 'puma', '~> 4.3'
+gem 'puma', '~> 6.0'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
@@ -53,7 +53,7 @@ group :development do
 end
 
 group :test do
-  gem 'async-websocket', '~> 0.8.0'
+  gem 'async-websocket', '~> 0.30.0'
   gem 'faker'
   gem 'rack-test'
   gem 'rake'

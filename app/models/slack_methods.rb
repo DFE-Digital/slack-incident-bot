@@ -72,9 +72,9 @@ class SlackMethods
 
   def self.introduce_incident!(channel_id, tech_lead)
     message = slack_client.chat_postMessage(channel: channel_id,
-                                            text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV['INCIDENT_PLAYBOOK']}|Incident playbook> \n><#{ENV['INCIDENT_CATEGORIES']}|Incident categorisation>")
+                                            text: "Welcome to the incident channel. Please review the following docs:\n> <#{ENV.fetch('INCIDENT_PLAYBOOK', nil)}|Incident playbook> \n><#{ENV.fetch('INCIDENT_CATEGORIES', nil)}|Incident categorisation>")
     slack_client.pins_add(channel: channel_id, timestamp: message[:ts])
-    slack_client.chat_postMessage(channel: channel_id, text: "<@#{tech_lead}> please make a copy of the <#{ENV['INCIDENT_TEMPLATE']}|incident template>.")
+    slack_client.chat_postMessage(channel: channel_id, text: "<@#{tech_lead}> please make a copy of the <#{ENV.fetch('INCIDENT_TEMPLATE', nil)}|incident template>.")
   end
 
   def self.open_the_modal(trigger_id, view_payload)
@@ -85,6 +85,6 @@ class SlackMethods
   end
 
   def self.slack_client
-    @_client = Slack::Web::Client.new(token: ENV['SLACK_TOKEN'])
+    @_client = Slack::Web::Client.new(token: ENV.fetch('SLACK_TOKEN', nil))
   end
 end

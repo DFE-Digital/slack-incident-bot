@@ -12,7 +12,7 @@ module IncidentCommands
 
       def modal_json
         JSON.parse(
-          File.read(Rails.root.join('lib/view_payloads/incident.json')),
+          Rails.root.join('lib/view_payloads/incident.json').read,
         )
       end
     end

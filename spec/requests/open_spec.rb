@@ -17,7 +17,7 @@ describe 'slash_commands/incident open' do
     end
 
     it 'successfully processes the request' do
-      modal_json = JSON.parse(File.read(Rails.root.join('lib/view_payloads/incident.json')))
+      modal_json = JSON.parse(Rails.root.join('lib/view_payloads/incident.json').read)
 
       view_payload = modal_json.merge(
         {

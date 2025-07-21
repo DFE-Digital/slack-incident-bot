@@ -19,7 +19,7 @@ describe 'slash_command/incident update' do
     end
 
     it 'returns incident updated confirmation' do
-      modal_json = JSON.parse(File.read(Rails.root.join('lib/view_payloads/update.json')))
+      modal_json = JSON.parse(Rails.root.join('lib/view_payloads/update.json').read)
 
       view_payload = modal_json.merge(
         {

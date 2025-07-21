@@ -1,4 +1,4 @@
-require: rubocop-rspec
+plugins: rubocop-rspec
 
 RSpec/NestedGroups:
   Enabled: true
@@ -40,10 +40,8 @@ RSpec/MultipleMemoizedHelpers:
 RSpec/StubbedMock:
   Enabled: true
 
-RSpec/Capybara/FeatureMethods:
-  EnabledMethods:
-    - feature
-    - scenario
+# Removed deprecated RSpec/Capybara/FeatureMethods cop
+# Use RSpec/Dialect instead if needed
 
 RSpec/AnyInstance:
   Enabled: false

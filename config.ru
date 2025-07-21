@@ -15,7 +15,7 @@ ActiveRecord::Base.establish_connection(
     ERB.new(
       File.read('config/database.yml'),
     ).result, [], [], true
-  )[ENV['RACK_ENV']],
+  )[ENV.fetch('RACK_ENV', nil)],
 )
 
 run Rails.application

@@ -16,7 +16,7 @@ describe 'slash_commands/ping' do
 
     it 'returns pong' do
       post '/api/slack/command', params: payload
-      expect(JSON.parse(response.body)).to eq('text' => 'pong')
+      expect(response.parsed_body).to eq('text' => 'pong')
       expect(response.status).to eq 201
     end
   end
