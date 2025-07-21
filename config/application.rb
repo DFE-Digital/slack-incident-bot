@@ -41,6 +41,6 @@ module SlackRailsBotStarter
     # Skip views, helpers and assets when generating a new resource.
     config.api_only = true
 
-    config.hosts << ENV.fetch('BASE_URL')
+    config.hosts << ENV.fetch('ENV_URL')
   end
 end
