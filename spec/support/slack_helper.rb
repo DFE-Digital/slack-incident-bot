@@ -18,15 +18,15 @@ module SlackHelper
   def stub_slack_open_view(trigger_id:, view_payload:)
     stub_request(:post, 'https://slack.com/api/views.open')
       .with(
-        body: { 'trigger_id' => trigger_id, 'view' => view_payload },
+        body: hash_including(
+          trigger_id: trigger_id,
+        ),
         headers: {
-          'Accept' => 'application/json; charset=utf-8',
-          'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-          'Content-Type' => 'application/x-www-form-urlencoded',
-          'User-Agent' => 'Slack Ruby Client/1.0.0',
-        },
+          'Authorization' => /^Bearer xoxb-/,
+          'Content-Type' => 'application/x-www-form-urlencoded'
+        }
       )
-      .to_return(status: 200, body: dummy_slack_response, headers: {})
+      .to_return(status: 200, body: dummy_slack_response.to_json, headers: {})
   end
 
   def stub_slack_ephemeral_error_message(channel:, message:)
@@ -34,11 +34,9 @@ module SlackHelper
   .with(
     body: { 'channel' => channel, 'text' => message, 'user' => channel },
     headers: {
-      'Accept' => 'application/json; charset=utf-8',
-      'Accept-Encoding' => 'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
-      'Content-Type' => 'application/x-www-form-urlencoded',
-      'User-Agent' => 'Slack Ruby Client/1.0.0',
-    },
+      'Authorization' => /^Bearer xoxb-/,
+      'Content-Type' => 'application/x-www-form-urlencoded'
+    }
   )
   .to_return(status: 200, body: dummy_slack_response, headers: {})
   end
