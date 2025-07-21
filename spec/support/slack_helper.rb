@@ -22,8 +22,10 @@ module SlackHelper
           trigger_id: trigger_id,
         ),
         headers: {
-          'Authorization' => /^Bearer xoxb-/,
-          'Content-Type' => 'application/x-www-form-urlencoded'
+          'Accept'=>'application/json; charset=utf-8',
+          'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+          'Content-Type'=>'application/x-www-form-urlencoded',
+          'User-Agent'=>'Slack Ruby Client/2.7.0'
         }
       )
       .to_return(status: 200, body: dummy_slack_response.to_json, headers: {})
@@ -34,8 +36,10 @@ module SlackHelper
   .with(
     body: { 'channel' => channel, 'text' => message, 'user' => channel },
     headers: {
-      'Authorization' => /^Bearer xoxb-/,
-      'Content-Type' => 'application/x-www-form-urlencoded'
+      'Accept'=>'application/json; charset=utf-8',
+      'Accept-Encoding'=>'gzip;q=1.0,deflate;q=0.6,identity;q=0.3',
+      'Content-Type'=>'application/x-www-form-urlencoded',
+      'User-Agent'=>'Slack Ruby Client/2.7.0'
     }
   )
   .to_return(status: 200, body: dummy_slack_response, headers: {})
