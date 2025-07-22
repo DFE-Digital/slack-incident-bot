@@ -68,7 +68,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Apply",
+              "text": "Access your teaching qualifications",
               "emoji": true
             },
             "value": "value-0"
@@ -76,7 +76,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Find",
+              "text": "Apply for QTS",
               "emoji": true
             },
             "value": "value-1"
@@ -84,7 +84,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Qualified Teachers API",
+              "text": "Apply/Manage",
               "emoji": true
             },
             "value": "value-2"
@@ -92,7 +92,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "TTAPI",
+              "text": "Check a teacher's record",
               "emoji": true
             },
             "value": "value-3"
@@ -100,7 +100,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Register",
+              "text": "Claim Additional Payments",
               "emoji": true
             },
             "value": "value-4"
@@ -108,7 +108,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Find a lost TRN",
+              "text": "Claim Funding for Mentors",
               "emoji": true
             },
             "value": "value-5"
@@ -116,7 +116,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Apply for QTS",
+              "text": "Early Careers Framework",
               "emoji": true
             },
             "value": "value-6"
@@ -124,7 +124,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Refer serious misconduct",
+              "text": "Find a lost TRN",
               "emoji": true
             },
             "value": "value-7"
@@ -132,7 +132,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Access you teaching qualifications",
+              "text": "Manage School Placements",
               "emoji": true
             },
             "value": "value-8"
@@ -140,7 +140,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Check a teacher's record",
+              "text": "Multiple",
               "emoji": true
             },
             "value": "value-9"
@@ -148,7 +148,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Multiple",
+              "text": "National Professional Qualifications",
               "emoji": true
             },
             "value": "value-10"
@@ -160,6 +160,54 @@
               "emoji": true
             },
             "value": "value-11"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Publish/Find",
+              "emoji": true
+            },
+            "value": "value-12"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Qualified Teachers API",
+              "emoji": true
+            },
+            "value": "value-13"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Refer serious misconduct",
+              "emoji": true
+            },
+            "value": "value-14"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Register trainee teachers",
+              "emoji": true
+            },
+            "value": "value-15"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Teaching Vacancies",
+              "emoji": true
+            },
+            "value": "value-16"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Teaching Record System",
+              "emoji": true
+            },
+            "value": "value-17"
           }
         ]
       }
