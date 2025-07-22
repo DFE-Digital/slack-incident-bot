@@ -270,7 +270,8 @@
     {
       "type": "input",
       "block_id": "incident_comms_lead_block",
-      "label": {
+      "optional": true,
+     "label": {
         "type": "plain_text",
         "text": "Who is the comms lead?",
         "emoji": true
@@ -288,6 +289,7 @@
     {
       "type": "input",
       "block_id": "incident_tech_lead_block",
+      "optional": true,
       "label": {
         "type": "plain_text",
         "text": "Who is the technical lead?",
@@ -306,6 +308,7 @@
     {
       "type": "input",
       "block_id": "incident_support_lead_block",
+      "optional": true,
       "label": {
         "type": "plain_text",
         "text": "Who is the support lead?",
