@@ -230,7 +230,7 @@ GEM
       date
       stringio
     public_suffix (5.1.1)
-    puma (4.3.12)
+    puma (6.6.0)
       nio4r (~> 2.0)
     racc (1.8.1)
     rack (2.2.17)
@@ -413,7 +413,7 @@ DEPENDENCIES
   otr-activerecord
   pg
   pry
-  puma (~> 4.3)
+  puma (>= 6.4.3)
   rack-test
   rails (~> 7.1)
   rake

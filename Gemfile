@@ -7,7 +7,7 @@ ruby '3.4.2'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 7.1'
 # Use Puma as the app server
-gem 'puma', '~> 4.3'
+gem "puma", ">= 6.4.3"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 # gem 'jbuilder', '~> 2.7'
 # Use Redis adapter to run Action Cable in production
