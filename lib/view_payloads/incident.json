@@ -232,7 +232,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "P1 (High) - 60-100% of users affected",
+              "text": "P1 (High reputational risk / data breach / 60%+ users affected)",
               "emoji": true
             },
             "value": "value-0"
@@ -240,7 +240,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "P2 (Medium) - 20-59% of users affected",
+              "text": "P2 (Medium reputational risk / 20-59%+ users affected)",
               "emoji": true
             },
             "value": "value-1"
@@ -248,7 +248,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "P3 (Low) - <20% of users affected",
+              "text": "P3 (Low reputational risk / 0-20% users affected)",
               "emoji": true
             },
             "value": "value-2"
