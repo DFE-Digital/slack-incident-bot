@@ -1,147 +1,147 @@
 {
-    "type": "modal",
-    "callback_id": "incident-update-modal-identifier",
-    "title": {
+  "type": "modal",
+  "callback_id": "incident-update-modal-identifier",
+  "title": {
+    "type": "plain_text",
+    "text": "Update the incident"
+  },
+  "submit": {
+    "type": "plain_text",
+    "text": "Update"
+  },
+  "close": {
+    "type": "plain_text",
+    "text": "Cancel",
+    "emoji": true
+  },
+  "blocks": [
+    {
+      "type": "header",
+      "text": {
         "type": "plain_text",
-        "text": "Update the incident"
-    },
-    "submit": {
-        "type": "plain_text",
-        "text": "Update"
-    },
-    "close": {
-        "type": "plain_text",
-        "text": "Cancel",
+        "text": "Incident Update",
         "emoji": true
+      }
     },
-    "blocks": [
-		{
-			"type": "header",
-			"text": {
-				"type": "plain_text",
-				"text": "Incident Update",
-				"emoji": true
-			}
-		},
-		{
-			"type": "input",
-			"block_id": "incident_description_block",
-			"optional": true,
-			"element": {
-				"type": "plain_text_input",
-				"action_id": "incident_description",
-				"multiline": true,
-				"placeholder": {
-					"type": "plain_text",
-					"text": "What is the incident about?"
-				}
-			},
-			"label": {
-				"type": "plain_text",
-				"text": "Change the incident description"
-			}
-		},
-		{
-			"type": "input",
-			"block_id": "incident_priority_block",
-			"optional": true,
-			"label": {
-				"type": "plain_text",
-				"text": "Change the incident priority?",
-				"emoji": true
-			},
-			"element": {
-				"type": "static_select",
-				"action_id": "incident_priority",
-				"placeholder": {
-					"type": "plain_text",
-					"text": "Select a level",
-					"emoji": true
-				},
-				"options": [
-					{
-						"text": {
-							"type": "plain_text",
+    {
+      "type": "input",
+      "block_id": "incident_description_block",
+      "optional": true,
+      "element": {
+        "type": "plain_text_input",
+        "action_id": "incident_description",
+        "multiline": true,
+        "placeholder": {
+          "type": "plain_text",
+          "text": "What is the incident about?"
+        }
+      },
+      "label": {
+        "type": "plain_text",
+        "text": "Change the incident description"
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "incident_priority_block",
+      "optional": true,
+      "label": {
+        "type": "plain_text",
+        "text": "Change the incident priority?",
+        "emoji": true
+      },
+      "element": {
+        "type": "static_select",
+        "action_id": "incident_priority",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select a level",
+          "emoji": true
+        },
+        "options": [
+          {
+            "text": {
+              "type": "plain_text",
               "text": "P1 (High reputational risk / data breach / 60%+ users affected)",
-							"emoji": true
-						},
-						"value": "value-0"
-					},
-					{
-						"text": {
-							"type": "plain_text",
+              "emoji": true
+            },
+            "value": "value-0"
+          },
+          {
+            "text": {
+              "type": "plain_text",
               "text": "P2 (Medium reputational risk / 20-59%+ users affected)",
-							"emoji": true
-						},
-						"value": "value-1"
-					},
-					{
-						"text": {
-							"type": "plain_text",
+              "emoji": true
+            },
+            "value": "value-1"
+          },
+          {
+            "text": {
+              "type": "plain_text",
               "text": "P3 (Low reputational risk / 0-20% users affected)",
-							"emoji": true
-						},
-						"value": "value-2"
-					}
-				]
-			}
-		},
-		{
-			"type": "input",
-			"block_id": "incident_comms_lead_block",
-			"optional": true,
-			"label": {
-				"type": "plain_text",
-				"text": "Change the comms lead?",
-				"emoji": true
-			},
-			"element": {
-				"type": "users_select",
-				"placeholder": {
-					"type": "plain_text",
-					"text": "Select a user",
-					"emoji": true
-				},
-				"action_id": "comms_lead_select_action"
-			}
-		},
-		{
-			"type": "input",
-			"block_id": "incident_tech_lead_block",
-			"optional": true,
-			"label": {
-				"type": "plain_text",
-				"text": "Change the technical lead?",
-				"emoji": true
-			},
-			"element": {
-				"type": "users_select",
-				"placeholder": {
-					"type": "plain_text",
-					"text": "Select a user",
-					"emoji": true
-				},
-				"action_id": "tech_lead_select_action"
-			}
-		},
-		{
-			"type": "input",
-			"block_id": "incident_support_lead_block",
-			"optional": true,
-			"label": {
-				"type": "plain_text",
-				"text": "Change the support lead?",
-				"emoji": true
-			},
-			"element": {
-				"type": "users_select",
-				"placeholder": {
-					"type": "plain_text",
-					"text": "Select a user",
-					"emoji": true
-				},
-				"action_id": "support_lead_select_action"
-			}
-		}
-	]
+              "emoji": true
+            },
+            "value": "value-2"
+          }
+        ]
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "incident_comms_lead_block",
+      "optional": true,
+      "label": {
+        "type": "plain_text",
+        "text": "Change the comms lead?",
+        "emoji": true
+      },
+      "element": {
+        "type": "users_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select a user",
+          "emoji": true
+        },
+        "action_id": "comms_lead_select_action"
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "incident_tech_lead_block",
+      "optional": true,
+      "label": {
+        "type": "plain_text",
+        "text": "Change the technical lead?",
+        "emoji": true
+      },
+      "element": {
+        "type": "users_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select a user",
+          "emoji": true
+        },
+        "action_id": "tech_lead_select_action"
+      }
+    },
+    {
+      "type": "input",
+      "block_id": "incident_support_lead_block",
+      "optional": true,
+      "label": {
+        "type": "plain_text",
+        "text": "Change the support lead?",
+        "emoji": true
+      },
+      "element": {
+        "type": "users_select",
+        "placeholder": {
+          "type": "plain_text",
+          "text": "Select a user",
+          "emoji": true
+        },
+        "action_id": "support_lead_select_action"
+      }
+    }
+  ]
 }
