@@ -8,11 +8,10 @@ module IncidentCommands
 
       begin
         if channel_name.include? 'incident'
-          channel_calling_incident = Rails.cache.read(channel_name)
           message = SlackMethods.post_a_message(channel_id, '<!here> This incident has now closed.')
           SlackMethods.pin_a_message(channel_id, message[:ts])
 
-          SlackMethods.post_a_message(channel_calling_incident, ":white_check_mark: <!channel> The incident in <##{channel_id}> has now closed.")
+          post_to_channel_calling_incident(name, channel_id)
         else
           SlackMethods.post_a_message_to_user(
             command[:user_id],
@@ -25,6 +24,17 @@ module IncidentCommands
           command[:user_id],
           command[:user_id],
           'This is not an incident channel.',
+        )
+      end
+    end
+
+    private
+
+    def self.post_to_channel_calling_incident(channel_name, channel_id)
+      if (channel_calling_incident = Rails.cache.read(channel_name))
+        SlackMethods.post_a_message(
+          channel_calling_incident,
+          ":white_check_mark: <!channel> The incident in <##{channel_id}> has now closed.",
         )
       end
     end
