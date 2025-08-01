@@ -11,7 +11,15 @@ SlackRubyBotServer::Events.configure do |config|
       IncidentCommands::Close.perform(command)
       nil
     when 'help'
-      { text: "open: open a new incident \n update: update an ongoing incident \n close: close the incident" }
+      {
+        text: <<~HELP_TEXT
+      *open*: Initiate the incident bot by sending the message `/incident open` in your service Slack channel.
+
+      *update*: Update an ongoing incident by sending the message `/incident update` in the incident Slack channel.
+
+      *close*: Close the incident by sending the message `/incident close` in the incident Slack channel.
+        HELP_TEXT
+      }
     else
       { text: 'This is not a valid command.' }
     end
