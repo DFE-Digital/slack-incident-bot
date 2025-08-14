@@ -196,7 +196,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Register trainee teachers",
+              "text": "Register of training providers",
               "emoji": true
             },
             "value": "value-16"
@@ -204,7 +204,7 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Teaching Vacancies",
+              "text": "Register trainee teachers",
               "emoji": true
             },
             "value": "value-17"
@@ -212,10 +212,18 @@
           {
             "text": {
               "type": "plain_text",
-              "text": "Teaching Record System",
+              "text": "Teaching Vacancies",
               "emoji": true
             },
             "value": "value-18"
+          },
+          {
+            "text": {
+              "type": "plain_text",
+              "text": "Teaching Record System",
+              "emoji": true
+            },
+            "value": "value-19"
           }
         ]
       }
